@@ -86,8 +86,17 @@ async function consultarProcesso() {
     const protocoloDigitado = input.value.trim().toUpperCase();
     const resultadoArea = document.getElementById("resultadoProcesso");
 
+    // Lógica 0: Verifica o selo de humanidade do Captcha
+    const turnstileInput = document.querySelector('[name="cf-turnstile-response"]');
+    const cfToken = turnstileInput ? turnstileInput.value : null;
+
     if (!protocoloDigitado) {
         exibirResultado("⚠ Por favor, digite o número do protocolo.", "warning");
+        return;
+    }
+
+    if (!cfToken) {
+        exibirResultado("⚠ Verificação de segurança (Anti-Robô) pendente ou expirada. Pressione F5 e aguarde a validação.", "warning");
         return;
     }
 
@@ -110,7 +119,13 @@ async function consultarProcesso() {
         const encodedProtocol = encodeURIComponent(protocoloDigitado);
         
         // Chamando o link absoluto onde nossa API Backend está hospedada agora!
-        const resProxy = await fetch(`https://portal-novo-eta.vercel.app/api/consultar?protocolo=${encodedProtocol}`, { method: 'GET' });
+        // E enviando o token de segurança Anti-Robô no cabeçalho
+        const resProxy = await fetch(`https://portal-novo-eta.vercel.app/api/consultar?protocolo=${encodedProtocol}`, { 
+            method: 'GET',
+            headers: {
+                'X-Turnstile-Token': cfToken
+            }
+        });
 
         if (resProxy.status === 429) {
             exibirResultado(`⚠️ <b>Limite de consultas atingido.</b><br><small>Você realizou muitas buscas em pouco tempo. Por favor, aguarde cerca de 1 minuto e tente novamente.</small>`, "warning");

@@ -26,6 +26,36 @@ export default async function handler(req, res) {
         return res.status(400).json({ erro: "Protocolo não informado." });
     }
 
+    // -------------------------------------------------------------
+    // VALIDAÇÃO ANTI-BOT (CLOUDFLARE TURNSTILE)
+    // -------------------------------------------------------------
+    const turnstileToken = req.headers['x-turnstile-token'];
+    if (!turnstileToken) {
+        return res.status(403).json({ erro: "Acesso negado: Validação Anti-Robô ausente." });
+    }
+
+    const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || '1x0000000000000000000000000000000AA';
+
+    try {
+        const cfFormData = new URLSearchParams();
+        cfFormData.append('secret', TURNSTILE_SECRET);
+        cfFormData.append('response', turnstileToken);
+
+        const cfRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            body: cfFormData
+        });
+        const cfData = await cfRes.json();
+        
+        if (!cfData.success) {
+            return res.status(403).json({ erro: "Interceptado: O teste de humanidade falhou." });
+        }
+    } catch (e) {
+        console.error("Erro no Cloudflare:", e);
+        return res.status(500).json({ erro: "Falha ao validar sistema anti-robô." });
+    }
+    // -------------------------------------------------------------
+
     // 2. Chaves de Acesso
     // ATENÇÃO: O ideal é mover isso para o painel "Environment Variables" da Vercel depois!
     // Ex: const SUPABASE_URL = process.env.SUPABASE_URL;
