@@ -180,27 +180,7 @@ async function consultarProcesso() {
                    !obs.includes("nao faz jus");
         });
 
-        let filaAtivaVTC = [];
-        if (temVTCAtivo) {
-            try {
-                // Consulta Direta Fila VTC Supabase, agrupando os que estão pendentes na fila geral
-                const resFila = await fetch(`${SUPABASE_URL}/rest/v1/sefrep_registros?tema=ilike.*VTC*&or=(status.ilike.*lise*,status.ilike.*andamento*,status.ilike.*exig*)&select=*`, { method: 'GET', headers: defaultHeaders });
-                if (resFila.ok) {
-                    const todosVtc = await resFila.json();
-                    filaAtivaVTC = todosVtc;
-                    filaAtivaVTC.sort((a, b) => {
-                        const d1 = new Date(a.data_entrada || 0).getTime();
-                        const d2 = new Date(b.data_entrada || 0).getTime();
-                        if (d1 === d2) {
-                            return new Date(a.created_at || 0).getTime() - new Date(b.created_at || 0).getTime();
-                        }
-                        return d1 - d2;
-                    });
-                }
-            } catch (errFila) {
-                console.warn("Não foi possível carregar a fila global VTC", errFila);
-            }
-        }
+        // A fila global agora é calculada nativamente pela API Vercel no Backend para máxima segurança.
 
         // 3. Renderização Premium
         for (const processo of resultadosFiltrados) {
@@ -318,26 +298,19 @@ async function consultarProcesso() {
             }
             linhaDatas += exibicaoDataDOE;
 
-            // --- LÓGICA DE FILA INJETADA NO CABEÇALHO PARA VTC ---
+            // --- LÓGICA DE FILA (AGORA VINDO PRONTA DO BACKEND VERCEL) ---
             let infoFilaHtml = "";
-            let dataEntradaRealVTC = dataEntrada ? new Date(processo.data_entrada) : new Date();
 
-            if (isEmAnaliseVTC && filaAtivaVTC.length > 0) {
-                const indexNaFila = filaAtivaVTC.findIndex(p => p.id === processo.id);
-                if (indexNaFila >= 0) {
-                    const posicaoReal = indexNaFila + 1;
-                    
-                    const diasDecorridos = Math.floor((new Date() - dataEntradaRealVTC) / (1000 * 60 * 60 * 24));
-                    let diasEst = 60 + Math.floor((indexNaFila >= 0 ? indexNaFila : 0) * 0.25) - diasDecorridos;
-                    if (diasEst > 120) diasEst = 120;
-                    if (diasEst < 30) diasEst = 30;
-                    
-                    const dataPrevisao = new Date();
-                    dataPrevisao.setDate(dataPrevisao.getDate() + diasEst);
-                    const dd = String(dataPrevisao.getDate()).padStart(2, '0');
-                    const mm = String(dataPrevisao.getMonth() + 1).padStart(2, '0');
-                    const yy = String(dataPrevisao.getFullYear()).slice(-2);
-                    const dataFormatada = `${dd}/${mm}/${yy}`;
+            if (isEmAnaliseVTC && processo._posicaoFila) {
+                const posicaoReal = processo._posicaoFila;
+                const diasEst = processo._diasEstimados || 60;
+                
+                const dataPrevisao = new Date();
+                dataPrevisao.setDate(dataPrevisao.getDate() + diasEst);
+                const dd = String(dataPrevisao.getDate()).padStart(2, '0');
+                const mm = String(dataPrevisao.getMonth() + 1).padStart(2, '0');
+                const yy = String(dataPrevisao.getFullYear()).slice(-2);
+                const dataFormatada = `${dd}/${mm}/${yy}`;
                     
                     infoFilaHtml = `
                     <div class="mt-2 text-start">
@@ -350,7 +323,6 @@ async function consultarProcesso() {
                         </div>
                     </div>
                     `;
-                }
             }
 
             const colCard = document.createElement("div");
