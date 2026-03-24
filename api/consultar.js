@@ -1,6 +1,24 @@
 export default async function handler(req, res) {
     // A Vercel automaticamente roda essa função em um servidor escondido (Node.js)
-     
+
+    // -------------------------------------------------------------
+    // PROTEÇÃO E PERMISSÃO DE DOMÍNIOS EXTERNOS (CORS)
+    // -------------------------------------------------------------
+    // Aqui nós estamos "Avisando a Vercel" para aceitar receber chamadas
+    // vindas dos domínios do GitHub Pages ou de qualquer outro site de fora.
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Permite conexões do github.io
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+    // Navegadores fazem um "aviso prévio" de segurança chamado OPTIONS. 
+    // Precisamos sempre aprovar para o CORS funcionar!
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+    // -------------------------------------------------------------
+    
     // 1. Pegamos o que o frontend enviou via URL (ex: /api/consultar?protocolo=URE-X)
     const { protocolo } = req.query;
 

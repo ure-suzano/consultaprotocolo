@@ -106,9 +106,11 @@ async function consultarProcesso() {
     // -------------------------------------------------------------
 
     try {
-        // 2. Consulta direcionada ao nosso "Guarda-Costas" (API do Vercel)
+        // 2. Consulta direcionada ao nosso "Guarda-Costas" (API do Vercel remotamente do Github Pages)
         const encodedProtocol = encodeURIComponent(protocoloDigitado);
-        const resProxy = await fetch(`/api/consultar?protocolo=${encodedProtocol}`, { method: 'GET' });
+        
+        // Chamando o link absoluto onde nossa API Backend está hospedada agora!
+        const resProxy = await fetch(`https://portal-novo-eta.vercel.app/api/consultar?protocolo=${encodedProtocol}`, { method: 'GET' });
 
         if (resProxy.status === 429) {
             exibirResultado(`⚠️ <b>Limite de consultas atingido.</b><br><small>Você realizou muitas buscas em pouco tempo. Por favor, aguarde cerca de 1 minuto e tente novamente.</small>`, "warning");
