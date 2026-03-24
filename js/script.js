@@ -120,7 +120,7 @@ async function consultarProcesso() {
         
         // Chamando o link absoluto onde nossa API Backend está hospedada agora!
         // E enviando o token de segurança Anti-Robô no cabeçalho
-        const resProxy = await fetch(`https://portal-novo-eta.vercel.app/api/consultar?protocolo=${encodedProtocol}`, { 
+        const resProxy = await fetch(`https://api-consultaprotocolo.vercel.app/api/consultar?protocolo=${encodedProtocol}`, { 
             method: 'GET',
             headers: {
                 'X-Turnstile-Token': cfToken
