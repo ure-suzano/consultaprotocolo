@@ -1,0 +1,31 @@
+# ========================================
+# .gitignore — URE Suzano (Portal Público)
+# ========================================
+
+# Arquivos de teste e debug com credenciais
+dump.js
+test_sec.js
+teste_consulta.js
+test_integration.js
+simula_status.js
+mini_server.js
+out.json
+
+# Scripts legados com chaves antigas
+js/script_completo.js
+
+# Dependências Node.js
+node_modules/
+
+# Deploy scripts locais
+deploy.ps1
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production
+
+# Artefatos do sistema
+.DS_Store
+Thumbs.db
+*.log
