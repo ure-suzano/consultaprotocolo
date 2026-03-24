@@ -1,0 +1,55 @@
+export default async function handler(req, res) {
+    // A Vercel automaticamente roda essa função em um servidor escondido (Node.js)
+    
+    // 1. Pegamos o que o frontend enviou via URL (ex: /api/consultar?protocolo=URE-X)
+    const { protocolo } = req.query;
+
+    if (!protocolo) {
+        return res.status(400).json({ erro: "Protocolo não informado." });
+    }
+
+    // 2. Chaves de Acesso
+    // ATENÇÃO: O ideal é mover isso para o painel "Environment Variables" da Vercel depois!
+    // Ex: const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_URL = process.env.SUPABASE_URL || "https://fdcxcuyxrgbpmcrryiof.supabase.co";
+    const SUPABASE_KEY = process.env.SUPABASE_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkY3hjdXl4cmdicG1jcnJ5aW9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMTk5NTMsImV4cCI6MjA4OTY5NTk1M30.AGRudVkfcFNGTftdV02NA3Xz6Xs1WzYruqCWLVnF-Rw";
+
+    const defaultHeaders = {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+    };
+
+    try {
+        const encodedProtocol = encodeURIComponent(protocolo.trim().toUpperCase());
+        
+        // 3. Batemos no Supabase por tráz dos panos (invisível para o usuário)
+        const [resSefrep, resSeape] = await Promise.all([
+            fetch(`${SUPABASE_URL}/rest/v1/sefrep_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders }),
+            fetch(`${SUPABASE_URL}/rest/v1/seape_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders })
+        ]);
+
+        if (resSefrep.status === 429 || resSeape.status === 429) {
+            return res.status(429).json({ erro: "Limite de consultas atingido no BD." });
+        }
+
+        if (!resSefrep.ok || !resSeape.ok) {
+            return res.status(500).json({ erro: "Erro ao consultar as tabelas no banco de dados." });
+        }
+
+        const [dadosSefrep, dadosSeape] = await Promise.all([resSefrep.json(), resSeape.json()]);
+
+        // 4. Juntamos as informações das duas bases
+        let todosResultados = [
+            ...(dadosSefrep || []).map(p => ({ ...p, origem: 'SEFREP' })),
+            ...(dadosSeape || []).map(p => ({ ...p, origem: 'SEAPE' }))
+        ];
+
+        // 5. Devolvemos a lista limpa e bonita para o frontend
+        return res.status(200).json(todosResultados);
+
+    } catch (error) {
+        console.error("Erro interno no Proxy Vercel:", error);
+        return res.status(500).json({ erro: "Falha na comunicação Vercel <-> Supabase." });
+    }
+}

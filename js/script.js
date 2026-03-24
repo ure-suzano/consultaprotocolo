@@ -100,40 +100,27 @@ async function consultarProcesso() {
     `;
     resultadoArea.className = "mt-4 p-4 card-glass border-0 d-flex align-items-center justify-content-center shadow-lg";
 
-    // Configuração Supabase Direta Frontend c/ Ofuscação Leve Base64
-    const SUPABASE_URL = "https://fdcxcuyxrgbpmcrryiof.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkY3hjdXl4cmdicG1jcnJ5aW9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMTk5NTMsImV4cCI6MjA4OTY5NTk1M30.AGRudVkfcFNGTftdV02NA3Xz6Xs1WzYruqCWLVnF-Rw";
-
-    const defaultHeaders = {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json'
-    };
+    // -------------------------------------------------------------
+    // AS CHAVES E A URL DO SUPABASE NÃO EXISTEM MAIS NESTE ARQUIVO! 
+    // ESTAMOS 100% PROTEGIDOS PELA API DA VERCEL.
+    // -------------------------------------------------------------
 
     try {
-        // 2. Consulta em Paralelo (Supabase REST Direto) - Busca Exata ou Parcial Segura no campo 'protocolo'
+        // 2. Consulta direcionada ao nosso "Guarda-Costas" (API do Vercel)
         const encodedProtocol = encodeURIComponent(protocoloDigitado);
-        const [resSefrep, resSeape] = await Promise.all([
-            fetch(`${SUPABASE_URL}/rest/v1/sefrep_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders }),
-            fetch(`${SUPABASE_URL}/rest/v1/seape_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders })
-        ]);
+        const resProxy = await fetch(`/api/consultar?protocolo=${encodedProtocol}`, { method: 'GET' });
 
-        if (resSefrep.status === 429 || resSeape.status === 429) {
+        if (resProxy.status === 429) {
             exibirResultado(`⚠️ <b>Limite de consultas atingido.</b><br><small>Você realizou muitas buscas em pouco tempo. Por favor, aguarde cerca de 1 minuto e tente novamente.</small>`, "warning");
             return;
         }
 
-        if (!resSefrep.ok || !resSeape.ok) {
-            throw new Error("Erro na resposta da API.");
+        if (!resProxy.ok) {
+            throw new Error("Erro de comunicação com o servidor seguro Vercel.");
         }
 
-        const [dadosSefrep, dadosSeape] = await Promise.all([resSefrep.json(), resSeape.json()]);
-
-        // Juntar todos os resultados
-        let todosResultados = [
-            ...(dadosSefrep || []).map(p => ({ ...p, origem: 'SEFREP' })),
-            ...(dadosSeape || []).map(p => ({ ...p, origem: 'SEAPE' }))
-        ];
+        // O Proxy da Vercel já fez todo o trabalho sujo de buscar nas duas tabelas
+        const todosResultados = await resProxy.json();
 
         if (todosResultados.length === 0) {
             exibirResultado(`⚠️ Nenhum processo localizado para o protocolo: <b>${protocoloDigitado}</b>.<br><small>Verifique se o código foi digitado corretamente. Em caso de dúvidas, procure a sua unidade escolar.</small>`, "warning");
