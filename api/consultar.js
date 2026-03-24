@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     // A Vercel automaticamente roda essa função em um servidor escondido (Node.js)
-    
+     
     // 1. Pegamos o que o frontend enviou via URL (ex: /api/consultar?protocolo=URE-X)
     const { protocolo } = req.query;
 
