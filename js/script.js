@@ -207,31 +207,31 @@ async function consultarProcesso() {
             let isAposentadoria = false;
             let isEmAnaliseVTC = false;
 
-            if (isVTC) {
-                const temFinalizado = obsLower.includes("finalizado") || obsLower.includes("finalizada");
-                const temPendencia = obsLower.includes("falta") || obsLower.includes("correção") || obsLower.includes("pendente") || obsLower.includes("regularização") || obsLower.includes("devolvido para correção");
-                const temConcluido = obsLower.includes("concluido") || obsLower.includes("concluida");
-                
-                if (obsLower.includes("não faz jus") || obsLower.includes("nao faz jus")) {
-                    isNaoFazJus = true;
-                } else if (temFinalizado || temConcluido) {
-                    if (obsLower.includes("aposentadoria")) isAposentadoria = true;
-                    else if (obsLower.includes("abono")) isAbono = true;
-                    else if (!temPendencia) isAposentadoria = true;
-                }
-                
-                if (!isNaoFazJus && !isAbono && !isAposentadoria && (temPendencia || obsLower.includes("devolvido"))) {
-                    isRealmenteDevolvido = true;
-                }
+            const stLower = (processo.status || "").toLowerCase();
 
-                // Identifica se é o caso exato de "Em analise" puro que o usuário quer ver a fila
-                if (!isNaoFazJus && !isAbono && !isAposentadoria && !isRealmenteDevolvido) {
+            if (isVTC) {
+                // Combina palavras-chave de observacoes e status para garantir interpretação imune a erros de seleção
+                const strCombinada = obsLower + " " + stLower + " " + (processo.tema || "").toLowerCase();
+
+                if (strCombinada.includes("não faz jus") || strCombinada.includes("nao faz jus") || strCombinada.includes("indeferido")) {
+                    isNaoFazJus = true;
+                } 
+                else if (strCombinada.includes("devolvido") || strCombinada.includes("correção") || strCombinada.includes("correcao") || strCombinada.includes("pendencia") || strCombinada.includes("falta")) {
+                    isRealmenteDevolvido = true;
+                } 
+                else if (strCombinada.includes("finalizado") || strCombinada.includes("concluid")) {
+                    if (strCombinada.includes("abono")) {
+                        isAbono = true;
+                    } else {
+                        isAposentadoria = true; // Por padrão para VTC finalizada é Aposentadoria
+                    }
+                } 
+                else {
                     isEmAnaliseVTC = true;
                 }
             }
 
             // Definindo a cor e ícone baseando-se no STATUS
-            const stLower = (processo.status || "").toLowerCase();
             const isEmAndamentoStatus = stLower.includes("análise") || stLower.includes("analise") || stLower.includes("andamento") || stLower.includes("exigencia") || stLower.includes("exigência") || stLower.includes("atendendo");
 
             let classeCorLateral = isEmAndamentoStatus ? "border-left-warning" : "border-left-primary";
