@@ -82,14 +82,12 @@ function toggleRegrasFinanceiras() {
  */
 async function consultarProcesso() {
     const input = document.getElementById("processoNumero");
-    // Remove espaços duplos e garante busca robusta
-    const nomeOriginal = input.value.trim().toUpperCase();
-    const nomeLimpo = nomeOriginal.replace(/\s+/g, ' '); 
-    const nomeBusca = nomeLimpo.replace(/\s/g, '*'); // Transforma espaços em curingas para o Supabase
+    // Remove espaços no ínicio/fim e padroniza a busca (maiúsculas)
+    const protocoloDigitado = input.value.trim().toUpperCase();
     const resultadoArea = document.getElementById("resultadoProcesso");
 
-    if (!nomeBusca) {
-        exibirResultado("⚠ Por favor, digite seu nome completo.", "warning");
+    if (!protocoloDigitado) {
+        exibirResultado("⚠ Por favor, digite o número do protocolo.", "warning");
         return;
     }
 
@@ -97,7 +95,7 @@ async function consultarProcesso() {
     resultadoArea.innerHTML = `
         <div class="text-center py-5 w-100 animate__animated animate__fadeIn">
             <div class="spinner-grow text-primary mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
-            <p class="text-muted fw-medium mb-0">Sincronizando com as bases da SED-SP...</p>
+            <p class="text-muted fw-medium mb-0">Localizando protocolo nas bases de dados, um momento...</p>
         </div>
     `;
     resultadoArea.className = "mt-4 p-4 card-glass border-0 d-flex align-items-center justify-content-center shadow-lg";
@@ -113,10 +111,11 @@ async function consultarProcesso() {
     };
 
     try {
-        // 2. Consulta em Paralelo (Supabase REST Direto)
+        // 2. Consulta em Paralelo (Supabase REST Direto) - Busca Exata ou Parcial Segura no campo 'protocolo'
+        const encodedProtocol = encodeURIComponent(protocoloDigitado);
         const [resSefrep, resSeape] = await Promise.all([
-            fetch(`${SUPABASE_URL}/rest/v1/sefrep_registros?nome=ilike.*${encodeURIComponent(nomeBusca)}*&select=*`, { method: 'GET', headers: defaultHeaders }),
-            fetch(`${SUPABASE_URL}/rest/v1/seape_registros?nome=ilike.*${encodeURIComponent(nomeBusca)}*&select=*`, { method: 'GET', headers: defaultHeaders })
+            fetch(`${SUPABASE_URL}/rest/v1/sefrep_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders }),
+            fetch(`${SUPABASE_URL}/rest/v1/seape_registros?protocolo=ilike.*${encodedProtocol}*&select=*`, { method: 'GET', headers: defaultHeaders })
         ]);
 
         if (resSefrep.status === 429 || resSeape.status === 429) {
@@ -137,58 +136,15 @@ async function consultarProcesso() {
         ];
 
         if (todosResultados.length === 0) {
-            exibirResultado(`⚠️ Nenhum processo localizado para: <b>${nomeLimpo}</b>.<br><small>Verifique se o nome está correto ou procure a sua unidade escolar.</small>`, "warning");
+            exibirResultado(`⚠️ Nenhum processo localizado para o protocolo: <b>${protocoloDigitado}</b>.<br><small>Verifique se o código foi digitado corretamente. Em caso de dúvidas, procure a sua unidade escolar.</small>`, "warning");
             return;
         }
 
-        // --- LÓGICA DE DEDUPLICAÇÃO E SMART SEARCH ---
+        // --- LÓGICA DE DEDUPLICAÇÃO ---
+        // (Agrupa apenas em caso de duplicação do mesmo tema, embora os IDs sejam únicos)
         const temasUnicos = new Map();
         
-        // Função simples de similaridade (Jaro-Winkler simplificada ou Levenshtein)
-        const calcularSimilaridade = (s1, s2) => {
-            let m = 0;
-            if (s1.length === 0 || s2.length === 0) return 0;
-            if (s1 === s2) return 1;
-            const range = (Math.floor(Math.max(s1.length, s2.length) / 2)) - 1;
-            const s1Matches = new Array(s1.length).fill(false);
-            const s2Matches = new Array(s2.length).fill(false);
-            for (let i = 0; i < s1.length; i++) {
-                const low = Math.max(0, i - range);
-                const high = Math.min(i + range + 1, s2.length);
-                for (let j = low; j < high; j++) {
-                    if (!s2Matches[j] && s1[i] === s2[j]) {
-                        s1Matches[i] = true;
-                        s2Matches[j] = true;
-                        m++;
-                        break;
-                    }
-                }
-            }
-            if (m === 0) return 0;
-            let t = 0;
-            let k = 0;
-            for (let i = 0; i < s1.length; i++) {
-                if (s1Matches[i]) {
-                    while (!s2Matches[k]) k++;
-                    if (s1[i] !== s2[k]) t++;
-                    k++;
-                }
-            }
-            return (m / s1.length + m / s2.length + (m - t / 2) / m) / 3;
-        };
-
-        // Filtrar por similaridade para evitar puxar homônimos distantes
-        const resultadosValidos = todosResultados.filter(p => {
-            const score = calcularSimilaridade(nomeLimpo, (p.nome || "").toUpperCase());
-            return score > 0.85; // Limiar de confiança para Smart Search
-        });
-
-        if (resultadosValidos.length === 0) {
-            exibirResultado(`⚠️ Nenhum processo localizado para: <b>${nomeLimpo}</b>.<br><small>Tente digitar o nome completo sem abreviações.</small>`, "warning");
-            return;
-        }
-
-        resultadosValidos.forEach(p => {
+        todosResultados.forEach(p => {
             const temaKey = (p.tema || "OUTROS").toUpperCase().trim();
             if (!temasUnicos.has(temaKey)) {
                 temasUnicos.set(temaKey, p);
