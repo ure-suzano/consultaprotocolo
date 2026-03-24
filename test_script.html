@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head><title>Test</title></head>
+<body>
+<div id="resultadoProcesso"></div>
+<script>
+    async function test() {
+        try {
+            const dadosSefrep = [{"id":"7000e943-5f5c-4965-ba9f-9ca4741ee14a","tema_key":"VTC","tema":"VTC","nome":"SELMA DA SILVA MARIANO DOMINGUES","escola":"JOSE CAMILO DE ANDRADE","protocolo":"2731/1000/1992","status":"concluido"}];
+            const dadosSeape = [];
+            const nomeLimpo = "SELMA DA SILVA MARIANO DOMINGUES";
+            const resultadoArea = document.getElementById("resultadoProcesso");
+
+            let todosResultados = [
+                ...(dadosSefrep || []).map(p => ({ ...p, origem: 'SEFREP' })),
+                ...(dadosSeape || []).map(p => ({ ...p, origem: 'SEAPE' }))
+            ];
+            const temasUnicos = new Map();
+            const calcularSimilaridade = (s1, s2) => {
+                let m = 0;
+                if (s1.length === 0 || s2.length === 0) return 0;
+                if (s1 === s2) return 1;
+                const range = (Math.floor(Math.max(s1.length, s2.length) / 2)) - 1;
+                const s1Matches = new Array(s1.length).fill(false);
+                const s2Matches = new Array(s2.length).fill(false);
+                for (let i = 0; i < s1.length; i++) {
+                    const low = Math.max(0, i - range);
+                    const high = Math.min(i + range + 1, s2.length);
+                    for (let j = low; j < high; j++) {
+                        if (!s2Matches[j] && s1[i] === s2[j]) {
+                            s1Matches[i] = true;
+                            s2Matches[j] = true;
+                            m++;
+                            break;
+                        }
+                    }
+                }
+                if (m === 0) return 0;
+                let t = 0;
+                let k = 0;
+                for (let i = 0; i < s1.length; i++) {
+                    if (s1Matches[i]) {
+                        while (!s2Matches[k]) k++;
+                        if (s1[i] !== s2[k]) t++;
+                        k++;
+                    }
+                }
+                return (m / s1.length + m / s2.length + (m - t / 2) / m) / 3;
+            };
+
+            const resultadosValidos = todosResultados.filter(p => {
+                const score = calcularSimilaridade(nomeLimpo, (p.nome || "").toUpperCase());
+                return score > 0.85; 
+            });
+
+            resultadosValidos.forEach(p => {
+                const temaKey = (p.tema || "OUTROS").toUpperCase().trim();
+                if (!temasUnicos.has(temaKey)) {
+                    temasUnicos.set(temaKey, p);
+                }
+            });
+            const resultadosFiltrados = Array.from(temasUnicos.values());
+
+            const formatarDataLocal = (str) => {
+                if (!str) return null;
+                const partes = str.split('T')[0].split('-');
+                return partes.length === 3 ? `${partes[2]}/${partes[1]}/${partes[0]}` : null;
+            };
+
+            for (const processo of resultadosFiltrados) {
+                const tema = (processo.tema || "Processo").toUpperCase();
+                const statusReal = (processo.status || "em analise").toLowerCase();
+                const observacao = processo.observacoes || "";
+                const interessado = (processo.nome || "Não informado").toUpperCase();
+                const protocolo = processo.protocolo || "N/D";
+                const escola = (processo.escola || "").toUpperCase();
+                const isVTC = tema.includes("VTC");
+                const isQuinquenio = tema.includes("QUINQUÊNIO") || tema.includes("QUINQUENIO");
+
+                let classeCorLateral = "border-left-primary";
+                let corBadge = "bg-primary";
+                let iconeBadge = "bi-activity";
+                let statusDisplay = (processo.status || "EM ANÁLISE").toUpperCase();
+
+                const stLower = (processo.status || "").toLowerCase();
+                if (stLower.includes("finalizado") || stLower.includes("concluido") || stLower.includes("concluída")) {
+                    classeCorLateral = "border-left-success";
+                    corBadge = "bg-success";
+                    iconeBadge = "bi-check-circle-fill";
+                    statusDisplay = "FINALIZADO";
+                } else if (stLower.includes("devolvido") || stLower.includes("correção") || stLower.includes("correcao") || stLower.includes("exigência") || stLower.includes("pendente")) {
+                    classeCorLateral = "border-left-warning";
+                    corBadge = "bg-warning text-dark";
+                    iconeBadge = "bi-arrow-return-left";
+                    statusDisplay = "DEVOLVIDO / PENDÊNCIA";
+                } else if (stLower.includes("não faz jus") || stLower.includes("nao faz jus") || stLower.includes("indeferido")) {
+                    classeCorLateral = "border-left-danger";
+                    corBadge = "bg-danger";
+                    iconeBadge = "bi-x-circle-fill";
+                    statusDisplay = "NÃO FAZ JUS";
+                }
+
+                let obsLimpa = (observacao || "").trim();
+                let exibicaoProtocoloOuSEI = `<span>PROTOCOLO: <span class="text-primary">${protocolo}</span></span>`;
+                let exibicaoDataDOE = "";
+                let temDOE = false;
+
+                const isLicenca = tema.includes("LICENÇA") || tema.includes("LICENCA");
+                const isEvolucao = tema.includes("EVOLUÇÃO") || tema.includes("EVOLUCAO");
+
+                if (isLicenca || isEvolucao) {
+                    exibicaoProtocoloOuSEI = `<span>NÚMERO DO SEI: <span class="text-${corBadge.replace('bg-', '')}">${protocolo}</span></span>`;
+                }
+
+                if (tema.includes("APOSENTADORIA") && (obsLimpa.toUpperCase().includes("PUBLICAÇÃO EM DOE") || obsLimpa.toUpperCase().includes("PUBLICACAO EM DOE"))) {
+                    const regexDOE = /(?:PUBLICAÇÃO EM DOE|PUBLICACAO EM DOE):?\s*([\d]{2}\/[\d]{2}\/[\d]{4})/i;
+                    const match = obsLimpa.match(regexDOE);
+                    if (match && match[1]) {
+                        exibicaoDataDOE = `<span class="mx-2 text-muted fw-normal">|</span><span style="color: #6f42c1;"><i class="bi bi-newspaper me-1"></i> PUBLICAÇÃO EM DOE: <span class="fw-bold">${match[1]}</span></span>`;
+                        temDOE = true;
+                    }
+                }
+
+                const dataEntrada = formatarDataLocal(processo.data_entrada);
+                const dataSaida = formatarDataLocal(processo.data_saida);
+
+                let linhaDatas = "";
+                if (dataEntrada) {
+                    linhaDatas += `<span class="mx-2 text-muted fw-normal">|</span><span>ENTRADA: <span class="text-secondary fw-normal">${dataEntrada}</span></span>`;
+                }
+                if (dataSaida && !temDOE) {
+                    linhaDatas += `<span class="mx-2 text-muted fw-normal">|</span><span>SAÍDA: <span class="text-secondary fw-normal">${dataSaida}</span></span>`;
+                }
+                linhaDatas += exibicaoDataDOE;
+
+                const colCard = document.createElement("div");
+                
+                let blocoFila = "";
+                if (isVTC && (stLower === "em analise" || stLower === "em andamento")) {
+                    blocoFila = `<div class="card"></div>`;
+                }
+
+                let conteudoCard = `
+                    ${blocoFila}
+                    ${isQuinquenio ? `<div>ALERTA</div>` : ""}
+                    <div class="card border-0 mb-4 mx-auto shadow-sm text-start w-100" style="border-radius: 12px; ${classeCorLateral.replace('border-left', 'border-left:')} !important;">
+                        <div class="card-body p-4 position-relative">
+                            <span class="badge ${corBadge} position-absolute top-0 end-0 m-3 px-3 py-2 rounded-pill shadow-sm" style="font-size: 0.75rem;">
+                                <i class="bi ${iconeBadge}"></i> ${statusDisplay}
+                            </span>
+                            
+                            <h5 class="fw-bold mb-0 text-dark" style="text-transform: uppercase; letter-spacing: 0.5px; font-size: 1.25rem;">${interessado}</h5>
+                            
+                            <div class="d-flex align-items-center flex-wrap pt-1 mb-2 fw-bold" style="font-size: 0.8rem; color: #868e96; letter-spacing: 0.2px;">
+                                <span class="badge bg-light text-secondary border border-secondary-subtle me-2" style="font-size: 0.70rem; letter-spacing: 0.5px;">TEMA: ${tema}</span>
+                                ${exibicaoProtocoloOuSEI}
+                                ${linhaDatas}
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center flex-wrap pt-3 mt-1 border-top" style="border-top-color: #f1f3f5 !important;">
+                                <p class="mb-0 d-flex align-items-center" style="font-size: 0.85rem; color: #6c757d; letter-spacing: 0.2px;">
+                                    <i class="bi bi-building me-2 fs-5"></i> ${escola || "SUA UNIDADE ESCOLAR"}
+                                </p>
+                                <button class="collapsed mt-2 mt-sm-0 shadow-sm btn-detalhes" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalhe_${processo.id}" aria-expanded="false" style="background: none; border: 1px solid #e9ecef; color: #495057; font-weight: 500; font-size: 0.85rem; padding: 6px 14px; border-radius: 50px; display: inline-flex; align-items: center; cursor: pointer; transition: all 0.2s ease; background-color: #f8f9fa;">
+                                    Detalhes do Processo <i class="bi bi-chevron-down" style="margin-left: 6px; font-size: 1rem; color: #adb5bd; transition: transform 0.3s ease;"></i>
+                                </button>
+                            </div>
+
+                            <div class="collapse mt-3" id="collapseDetalhe_${processo.id}">
+                                <div class="p-3 shadow-sm border-${corBadge.replace('bg-', '')}-subtle bg-${corBadge.replace('bg-', '')}-subtle bg-opacity-10" style="border-radius: 8px; border: 1px solid #dee2e6;">
+                                    <h6 class="fw-bold text-${corBadge.replace('bg-', '').replace(' text-dark', '')} mb-2" style="font-size: 0.9rem;"><i class="bi bi-chat-left-text-fill me-1"></i> OBSERVAÇÃO:</h6>
+                                    <p class="small text-dark mb-0" style="line-height: 1.6;">
+                                        <i>"${obsLimpa || 'Sem detalhes adicionais disponíveis.'}"</i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                colCard.innerHTML = conteudoCard;
+                resultadoArea.appendChild(colCard);
+            }
+            document.body.innerHTML += "<h2>SUCCESS</h2>";
+        } catch(e) {
+            document.body.innerHTML += "<h2>ERROR: " + e.message + "</h2>";
+            document.body.innerHTML += "<pre>" + e.stack + "</pre>";
+        }
+    }
+    test();
+</script>
+</body>
+</html>

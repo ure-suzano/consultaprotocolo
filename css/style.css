@@ -1,0 +1,203 @@
+/* PERSONALIZAÇÕES PORTAL PREVIDENCIÁRIO (SOBRE BOOTSTRAP) */
+
+:root {
+    --primary-color: #1b1b6e; /* Azul Marinho Administrativo SED-SP */
+    --accent-gold: #ffcc00;
+    --status-concluido: #198754;
+    --status-analise: #0d6efd;
+    --status-pendente: #d39e00;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --dark-blue: #0b3d6d;
+}
+
+body {
+    font-family: 'Verdana', sans-serif;
+    color: #2b2b2b;
+    background-color: #f4f7f6;
+}
+
+/* Glassmorphism Card Style */
+.card-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* Status Vertical Accents */
+.status-border-concluido { border-left: 8px solid var(--status-concluido) !important; }
+.status-border-analise { border-left: 8px solid var(--status-analise) !important; }
+.status-border-pendente { border-left: 8px solid var(--status-pendente) !important; }
+
+/* Pulse Animation for In-Analysis */
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(13, 110, 253, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
+}
+.pulse-analise {
+    animation: pulse-blue 2s infinite;
+}
+
+/* Telas (controle manual via JS) */
+.tela {
+    display: none;
+    min-height: 400px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.color-primary-text {
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+
+header {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, #1a4d80 100%) !important;
+    border-bottom: 4px solid #ffffff;
+}
+
+header h1 {
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Hero Card Section */
+.card-hero {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 2.5rem;
+}
+
+.btn-hero {
+    background-color: var(--dark-blue);
+    color: white !important;
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid var(--dark-blue);
+    margin: 0.5rem;
+}
+
+.btn-hero:hover {
+    background-color: transparent;
+    color: var(--dark-blue) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(11, 61, 109, 0.2);
+}
+
+.btn-hero i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+/* Ajustes Navbar Premium */
+.navbar-premium {
+    background-color: rgba(11, 61, 109, 0.95) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn-pill {
+    border-radius: 50px !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.8rem !important;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.05);
+    color: white !important;
+}
+
+.nav-btn-pill:hover {
+    background: var(--accent-gold) !important;
+    color: var(--dark-blue) !important;
+    border-color: var(--accent-gold) !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+}
+
+.nav-btn-pill i {
+    font-size: 1.1rem;
+    vertical-align: middle;
+}
+
+/* Consultar Processo feedback box */
+#resultadoProcesso {
+    min-height: 80px;
+    font-size: 1.1rem;
+}
+
+/* Responsividade Customizada */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        margin-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 1rem;
+    }
+}
+
+/* Enhancements para UI de Requisitos da Previdência */
+#reqTab .nav-link {
+    color: var(--dark-blue);
+    transition: all 0.3s ease;
+}
+
+#reqTab .nav-link.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+    border-width: 2px !important;
+}
+
+#requisitos .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#requisitos .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
+
+/* Classes de Utilidade Extra */
+.rounded-4 { border-radius: 1rem !important; }
+.shadow-xs { box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important; }
+.ls-1 { letter-spacing: 1px !important; }
+.transition-all { transition: all 0.3s ease !important; }
+.cursor-pointer { cursor: pointer !important; }
+
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* Footer Premium */
+.footer-premium {
+    background-color: #1a1a1a !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    letter-spacing: 0.5px;
+}

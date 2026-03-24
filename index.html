@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Processo - URE Suzano</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css?v=6.1">
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/script.js?v=6.1" defer></script>
+</head>
+
+<body class="bg-light">
+
+    <header class="text-white text-center py-5 shadow-sm">
+        <div class="container animate__animated animate__fadeIn">
+            <h1 class="h2 mb-0">PORTAL DE CONSULTA</h1>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-premium sticky-top shadow-sm">
+        <div class="container">
+            <button class="navbar-toggler mx-auto border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <small class="text-white ms-2 d-lg-none">MENU PRINCIPAL</small>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navMenu">
+                <ul class="navbar-nav gap-3 py-3 py-lg-0">
+                    <li id="nav-item-inicio" class="nav-item text-center">
+                        <button class="btn nav-btn-pill btn-sm d-inline-flex align-items-center" onclick="mostrar('inicio')">
+                            <i class="bi bi-house-fill me-2"></i> Início
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+
+                <!-- INICIO -->
+                <div id="inicio" class="tela bg-transparent p-0" style="display:block">
+                    <!-- Hero Card -->
+                    <div class="card-hero text-center animate__animated animate__fadeIn">
+                        <h2 class="fw-bold color-primary-text mb-2 px-md-5">Contagem de Tempo para Emissão de VTC</h2>
+                        <p class="text-muted mb-4">Validação de Tempo de Contribuição para fins de Abono de Permanência e Aposentadoria.</p>
+                        
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+                            <button class="btn btn-hero" onclick="mostrar('requisitos')">
+                                <i class="bi bi-journal-text"></i> Requisitos
+                            </button>
+                            <button class="btn btn-hero" onclick="mostrar('documentos')">
+                                <i class="bi bi-file-earmark-text"></i> Documentos VTC
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 justify-content-center">
+                        <!-- Consultar Processo -->
+                        <div class="col-md-6 col-lg-5">
+                            <div class="card h-100 shadow-sm border-0 border-top border-primary border-4 hover-shadow transition-all cursor-pointer bg-white"
+                                onclick="mostrar('consultar')">
+                                <div class="card-body text-center p-4">
+                                    <div class="bg-primary-subtle rounded-circle p-3 d-inline-block mb-3">
+                                        <i class="bi bi-search fs-2 text-primary"></i>
+                                    </div>
+                                    <h5 class="card-title fw-bold text-dark">Consultar meu processo</h5>
+                                    <p class="card-text text-muted small">Acompanhe em tempo real a posição e o status
+                                        da sua análise no SEFREP.</p>
+                                    <button class="btn btn-sm btn-outline-primary mt-2 rounded-pill px-4">Acessar
+                                        Consulta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOCUMENTOS -->
+                <div id="documentos"
+                    class="tela bg-white p-4 p-md-5 rounded shadow-sm animate__animated animate__fadeIn"
+                    style="display:none">
+                    <h2 class="border-bottom pb-2 mb-4 color-primary-text"><i
+                            class="bi bi-file-earmark-text me-2"></i>Documentos Necessários para VTC</h2>
+
+                    <!-- Aviso de Documentação Mínima -->
+                    <div class="alert alert-warning border-start border-4 border-warning mb-4 py-2 shadow-sm">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-exclamation-triangle-fill me-2 fs-5 text-warning"></i>
+                            <div class="small">
+                                <strong class="text-dark">Atenção:</strong> Esta é a documentação
+                                <strong>mínima</strong> para a solicitação.
+                                Toda a documentação precisa estar <strong>atualizada</strong> e ser entregue na
+                                <strong>unidade escolar de classificação</strong>.
+                                A lista final depende da <strong>vida funcional específica</strong> de cada servidor.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Documentos Pessoais e Bancários -->
+                        <div class="col-md-5">
+                            <h5 class="fw-bold mb-3 text-muted small text-uppercase tracking-wider">Documentos Pessoais
+                                e Bancários</h5>
+                            <div class="list-group shadow-sm border rounded">
+                                <div class="list-group-item bg-light-subtle d-flex align-items-start">
+                                    <i class="bi bi-file-earmark-person me-3 text-primary mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Requerimento assinado</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Com fundamento legal,
+                                            solicitando Abono de Permanência ou Aposentadoria.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-center"><i
+                                        class="bi bi-person-vcard me-3 text-primary"></i> RG</div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-center"><i
+                                        class="bi bi-person-badge me-3 text-primary"></i> CPF</div>
+                                <div class="list-group-item d-flex align-items-center"><i
+                                        class="bi bi-hearts me-3 text-primary"></i> Certidão de nascimento ou casamento
+                                </div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-center"><i
+                                        class="bi bi-geo-alt me-3 text-primary"></i> Comprovante de endereço</div>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="bi bi-bank me-3 text-primary"></i>
+                                    <div>
+                                        <div class="fw-bold small">Documentação Bancária</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Extrato do PIS/PASEP e
+                                            declaração do Banco.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-center">
+                                    <i class="bi bi-clock-history me-3 text-primary"></i>
+                                    <div>
+                                        <div class="fw-bold small">Certidão de Tempo de Contribuição</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">(INSS, Prefeitura, outras
+                                            Secretarias do Estado ex: Polícia Militar).</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Documentos Funcionais -->
+                        <div class="col-md-7">
+                            <h5 class="fw-bold mb-3 text-muted small text-uppercase tracking-wider">Documentos
+                                Funcionais</h5>
+                            <div class="list-group shadow-sm border rounded">
+                                <div class="list-group-item bg-light-subtle d-flex align-items-start">
+                                    <i class="bi bi-file-earmark-check me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Portarias de Admissão / Dispensa e Nomeação /
+                                            Exoneração</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Documentos que comprovam o
+                                            início e fim de cada vínculo funcional.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-start">
+                                    <i class="bi bi-file-earmark-plus me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Portarias de Admissão Especial</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Com os dias inseridos no
+                                            Verso.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-start">
+                                    <i class="bi bi-person-workspace me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Portarias de Designação e Cessação</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Vice Diretor, Diretor,
+                                            Professor Coordenador, PEI.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-start">
+                                    <i class="bi bi-building-up me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Títulos de Afastamento</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">TRE, Unidade de Ensino,
+                                            outras Secretarias, etc.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-start">
+                                    <i class="bi bi-graph-up-arrow me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Títulos de Evolução Funcional / Enquadramentos</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Promoções e alterações de
+                                            nível/cargo.</div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item d-flex align-items-start">
+                                    <i class="bi bi-clipboard2-check me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Declaração de Exercício (Readaptados)</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Documento oficial detalhando
+                                            o período exato e as atribuições da função exercida na condição de
+                                            <strong>Readaptação</strong>.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item bg-light-subtle d-flex align-items-start">
+                                    <i class="bi bi-file-earmark-medical me-3 text-success mt-1"></i>
+                                    <div>
+                                        <div class="fw-bold small">Cópia da Ficha FAI e Contdrhu</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">Ficha de Assentamento
+                                            Individual completa e cópia impressa do Contdrhu com frequência atualizada.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info mt-4 mb-0 py-2 small d-flex align-items-center">
+                        <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+                        Certifique-se de que todas as cópias estejam atualizadas e legíveis.
+                    </div>
+                </div>
+
+                <!-- REQUISITOS (NOVA PREVIDÊNCIA SP - LC 1354/2020) -->
+                <div id="requisitos"
+                    class="tela bg-white p-4 p-md-5 rounded shadow-sm animate__animated animate__fadeIn"
+                    style="display:none">
+                    <h2 class="border-bottom pb-2 mb-4 color-primary-text"><i class="bi bi-book me-2"></i> Requisitos de
+                        Aposentadoria (SP)</h2>
+
+                    <!-- NOVO CARD: REGRAS DE PARIDADE E INTEGRALIDADE (ESTILO LIMPO E COLAPSÁVEL) -->
+                    <div class="card shadow-sm mb-5 border-0 bg-light rounded-4 overflow-hidden">
+                        <div class="card-header bg-white border-bottom-0 pt-4 px-4 d-flex align-items-center justify-content-between cursor-pointer"
+                            onclick="toggleRegrasFinanceiras()">
+                            <h5 class="fw-bold color-primary-text mb-0">
+                                <i class="bi bi-piggy-bank me-2 text-success"></i> Regras de Paridade e Integralidade
+                            </h5>
+                            <span id="btnToggleRegras" class="text-muted small">Clique para expandir <i
+                                    class="bi bi-chevron-down ms-1"></i></span>
+                        </div>
+                        <div id="collapseRegrasFinanceiras" style="display:none">
+                            <div class="card-body p-4 pt-2">
+                                <div class="row g-4">
+                                    <!-- Direito Adquirido -->
+                                    <div class="col-md-4">
+                                        <div
+                                            class="bg-white p-4 rounded-4 border h-100 d-flex flex-column align-items-center text-center shadow-xs">
+                                            <h6 class="fw-bold text-success mb-3 text-uppercase ls-1">Direito Adquirido
+                                            </h6>
+                                            <p class="small text-muted mb-4 flex-grow-1">Quem já tinha tempo exato e
+                                                idade na data de <strong>07/03/2020</strong> (Véspera da Reforma)</p>
+                                            <span
+                                                class="badge rounded-pill bg-success-subtle text-success border border-success px-3 py-2">Mantém
+                                                regras antigas</span>
+                                        </div>
+                                    </div>
+                                    <!-- Regra de Transição -->
+                                    <div class="col-md-4">
+                                        <div class="bg-white p-4 rounded-4 border h-100 d-flex flex-column shadow-xs">
+                                            <h6 class="fw-bold text-primary mb-3 text-uppercase ls-1 text-center">Regra
+                                                de Transição</h6>
+                                            <p class="small text-muted mb-3 text-center">Depende do seu ano de ingresso
+                                                no funcionalismo público.</p>
+                                            <ul class="small text-dark mb-3 ps-3 flex-grow-1">
+                                                <li class="mb-2">Até 31/12/2003: <strong>Integralidade</strong> e
+                                                    <strong>Paridade</strong> <span class="text-muted">(Se respeitar as
+                                                        idades exigidas).</span>
+                                                </li>
+                                                <li>Após 2003: <strong>Média</strong> das contribuições.</li>
+                                            </ul>
+                                            <div
+                                                class="alert alert-warning border-0 rounded-3 p-3 mb-0 d-flex align-items-start">
+                                                <i
+                                                    class="bi bi-exclamation-triangle-fill fs-5 me-2 mt-1 text-warning"></i>
+                                                <div class="small lh-sm" style="font-size: 0.72rem;">
+                                                    <strong>Atenção:</strong> Servidores admitidos até 2003 que tiveram
+                                                    dispensa e nova admissão com intervalo superior a <strong>90
+                                                        dias</strong> perdem a Paridade/Integralidade, passando ao
+                                                    cálculo por <strong>100% da média</strong> das contribuições.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Regra Permanente -->
+                                    <div class="col-md-4">
+                                        <div
+                                            class="bg-white p-4 rounded-4 border h-100 d-flex flex-column align-items-center text-center shadow-xs">
+                                            <h6 class="fw-bold text-secondary mb-3 text-uppercase ls-1">Regra Permanente
+                                            </h6>
+                                            <p class="small text-muted mb-3">Ingressantes novos pós-2020.</p>
+                                            <p class="small text-dark flex-grow-1 lh-sm mb-4">Aposentadoria de 60% da
+                                                média salarial, acrescida de +2% para cada ano que exceder 20 anos de
+                                                contribuição.</p>
+                                            <span
+                                                class="badge rounded-pill bg-secondary-subtle text-secondary border border-secondary px-3 py-2">100%
+                                                das Médias desde 1994</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AVISO LEGAL IMPORTANTE -->
+                    <div class="alert alert-warning border-start border-4 border-warning shadow-sm mb-4" role="alert">
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-exclamation-octagon-fill fs-4 text-warning me-2"></i>
+                            <h6 class="alert-heading mb-0 fw-bold text-dark">Aviso Legal Importante</h6>
+                        </div>
+                        <p class="mb-0 text-dark small lh-base">As tabelas e requisitos abaixo foram simplificados (com
+                            base na EC n° 49/2020 e LC n° 1.354/2020) apenas para ilustrar e dar um "norte" ao servidor
+                            sobre a Nova Previdência. <strong>Eles não substituem o processo oficial!</strong> É
+                            estritamente obrigatório realizar o trâmite formal de <em>Contagem de Tempo</em> para ter a
+                            <strong>Validação de Tempo de Contribuição - VTC</strong> referente aos seus fundamentos de
+                            aposentadoria.
+                        </p>
+                    </div>
+
+                    <p class="text-muted small mb-4">Regras atualizadas conforme a <strong>Emenda Constitucional
+                            Estadual nº 49/2020</strong> e <strong>LC nº 1.354/2020</strong> (Nova Previdência). Escolha
+                        a sua categoria profissional abaixo:</p>
+
+                    <!-- Navegação Principal (Tabs) -->
+                    <ul class="nav nav-pills nav-fill mb-4 p-1 bg-light rounded-pill border shadow-sm" id="reqTab"
+                        role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active rounded-pill fw-bold px-4" id="geral-tab"
+                                data-bs-toggle="tab" data-bs-target="#geral" type="button" role="tab"
+                                aria-selected="true">
+                                <i class="bi bi-person-badge"></i> Servidores Administrativos (Geral)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link rounded-pill fw-bold px-4" id="prof-tab" data-bs-toggle="tab"
+                                data-bs-target="#prof" type="button" role="tab" aria-selected="false">
+                                <i class="bi bi-book-half"></i> Professores (Magistério)
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Conteúdo das Tabs -->
+                    <div class="tab-content" id="reqTabContent">
+
+                        <!-- TAB: SERVIDORES GERAIS -->
+                        <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">
+
+                            <!-- Regra de Transição: PONTOS -->
+                            <div class="card mb-4 border-primary shadow-sm">
+                                <div class="card-header bg-primary text-white py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-123 me-2"></i> 1. Transição: Regra de
+                                        Pontos (Art. 10)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3">Soma da <strong>Idade</strong> + <strong>Tempo de
+                                            Contribuição</strong> formatando a pontuação mínima.</p>
+                                    <div class="row g-3">
+                                        <!-- Mulher -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-danger-subtle h-100">
+                                                <h6 class="text-danger fw-bold mb-3"><i class="bi bi-gender-female"></i>
+                                                    Mulher (QAE/QSE)</h6>
+                                                <hr class="text-danger-subtle my-2">
+                                                <div class="d-flex justify-content-between mb-2"><span>Idade
+                                                        Mínima:</span> <span class="badge bg-danger">57 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2"><span>Contribuição
+                                                        (Total):</span> <span class="badge bg-danger">30 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2"><span>Serviço
+                                                        Público:</span> <span class="badge bg-secondary">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-3"><span>Tempo no
+                                                        Cargo:</span> <span class="badge bg-secondary">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Homem -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-primary-subtle h-100">
+                                                <h6 class="text-primary fw-bold mb-3"><i class="bi bi-gender-male"></i>
+                                                    Homem (QAE/QSE)</h6>
+                                                <hr class="text-primary-subtle my-2">
+                                                <div class="d-flex justify-content-between mb-2"><span>Idade
+                                                        Mínima:</span> <span class="badge bg-primary">62 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2"><span>Contribuição
+                                                        (Total):</span> <span class="badge bg-primary">35 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-2"><span>Serviço
+                                                        Público:</span> <span class="badge bg-secondary">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-3"><span>Tempo no
+                                                        Cargo:</span> <span class="badge bg-secondary">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tabela de Pontos Evolutiva -->
+                                    <div class="mt-4 p-3 border rounded bg-white">
+                                        <h6 class="fw-bold mb-3 text-center"><i
+                                                class="bi bi-graph-up-arrow text-primary"></i> Tabela Progressiva de
+                                            Pontos Mínimos</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-bordered text-center mb-0 align-middle">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Ano Vigente</th>
+                                                        <th class="text-danger">Atingir (Mulher)</th>
+                                                        <th class="text-primary">Atingir (Homem)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2020</td>
+                                                        <td>87 pts</td>
+                                                        <td>97 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2021</td>
+                                                        <td>88 pts</td>
+                                                        <td>98 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2022</td>
+                                                        <td>89 pts</td>
+                                                        <td>99 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2023</td>
+                                                        <td>90 pts</td>
+                                                        <td>100 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2024</td>
+                                                        <td>91 pts</td>
+                                                        <td>101 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025</td>
+                                                        <td>92 pts</td>
+                                                        <td>102 pts</td>
+                                                    </tr>
+                                                    <tr class="table-primary fw-bold">
+                                                        <td>2026</td>
+                                                        <td>93 pts</td>
+                                                        <td>103 pts</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="small text-muted text-center mt-2 mb-0">A pontuação sobe 1 ponto
+                                                por ano até o limite legislativo de 100/105.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regra de Transição: PEDÁGIO 100% -->
+                            <div class="card border-info shadow-sm mb-4">
+                                <div class="card-header bg-info text-dark py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-clock-history me-2"></i> 2. Transição:
+                                        Pedágio 100% (Geral)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3">Exige-se cumprir um tempo extra (100%) equivalente
+                                        ao período que <strong>faltava</strong> para completar o tempo de contribuição
+                                        na data da Nova Previdência SP (<strong>07/03/2020</strong>).</p>
+                                    <div class="row g-3">
+                                        <!-- Mulher -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-info h-100">
+                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
+                                                    Mulher</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-danger">57 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">30 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Homem -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-info h-100">
+                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i> Homem
+                                                </h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-primary">60 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">35 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Calculadora Visual Exemplo -->
+                                    <div class="alert alert-light border border-secondary border-dashed mt-4">
+                                        <h6 class="fw-bold text-dark"><i class="bi bi-calculator"></i> Exemplo Prático:
+                                            Pedágio (Servidor que precisava de 35 anos)</h6>
+                                        <div
+                                            class="d-flex flex-wrap align-items-center justify-content-center gap-2 mt-3 fs-6">
+                                            <div class="badge bg-secondary p-2 text-dark bg-opacity-25">Faltavam em
+                                                07/03/2020<br><b>2 anos e 3 meses</b></div>
+                                            <i class="bi bi-plus fs-3"></i>
+                                            <div class="badge bg-info p-2 text-dark">Pedágio 100%<br><b>+ 2 anos e 3
+                                                    meses</b></div>
+                                            <i class="bi bi-arrow-right fs-3"></i>
+                                            <div class="badge bg-success p-2">Contribuição Exigida<br><b>37 anos e 3
+                                                    meses</b></div>
+                                        </div>
+                                        <div class="mt-3 text-center small text-muted fst-italic">"Assim que completar
+                                            35 anos deve cumprir o tempo adicional de mais 2 anos e 3 meses..."</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regra Permanente (Art. 10) - GERAL -->
+                            <div class="card border-secondary shadow-sm mb-4">
+                                <div class="card-header bg-secondary text-white py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-calendar-check me-2"></i> 3. Regra
+                                        Permanente (Geral)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3">Aplicável aos servidores (QAE/QSE) que ingressarem
+                                        no Estado após a Reforma de <strong>07/03/2020</strong>.</p>
+                                    <div class="row g-3">
+                                        <!-- Mulher -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-secondary h-100">
+                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
+                                                    Mulher</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-danger">62 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Homem -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-secondary h-100">
+                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i> Homem
+                                                </h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-primary">65 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-secondary border-secondary mt-4 mb-0">
+                                        <h6 class="fw-bold text-dark"><i class="bi bi-calculator"></i> Forma de Cálculo
+                                            (Proventos)</h6>
+                                        <p class="small mb-0">60% da média aritmética de 100% das contribuições, com
+                                            acréscimo de 2% para cada ano que exceder os 20 anos de contribuição.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: PROFESSORES -->
+                        <div class="tab-pane fade" id="prof" role="tabpanel" aria-labelledby="prof-tab">
+
+                            <!-- Regra de Transição: PONTOS PROFESSORES -->
+                            <div class="card mb-4 border-warning shadow-sm">
+                                <div class="card-header bg-warning text-dark py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-123 me-2"></i> 1. Transição: Regra de
+                                        Pontos (Professores)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3"><span class="badge bg-dark">Redução especial de 5
+                                            anos</span> Tempo válido apenas no efetivo exercício do Magistério.</p>
+                                    <div class="row g-3">
+                                        <!-- Professora -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-danger-subtle h-100">
+                                                <h6 class="text-danger fw-bold mb-3"><i class="bi bi-gender-female"></i>
+                                                    Professora</h6>
+                                                <hr class="text-danger-subtle my-2">
+                                                <div class="d-flex justify-content-between mb-2"><span>Idade
+                                                        Mínima:</span> <span class="badge bg-danger">57 anos (pós
+                                                        2022)</span></div>
+                                                <div class="d-flex justify-content-between mb-3"><span>Contrib.
+                                                        (Magistério):</span> <span class="badge bg-danger">25
+                                                        anos</span></div>
+                                            </div>
+                                        </div>
+                                        <!-- Professor -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-primary-subtle h-100">
+                                                <h6 class="text-primary fw-bold mb-3"><i class="bi bi-gender-male"></i>
+                                                    Professor</h6>
+                                                <hr class="text-primary-subtle my-2">
+                                                <div class="d-flex justify-content-between mb-2"><span>Idade
+                                                        Mínima:</span> <span class="badge bg-primary">60 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-3"><span>Contrib.
+                                                        (Magistério):</span> <span class="badge bg-primary">30
+                                                        anos</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tabela de Pontos Evolutiva -->
+                                    <div class="mt-4 p-3 border rounded bg-white">
+                                        <h6 class="fw-bold mb-3 text-center"><i
+                                                class="bi bi-graph-up-arrow text-warning"></i> Tabela Progressiva de
+                                            Pontos (Magistério)</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-bordered text-center mb-0 align-middle">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Ano Vigente</th>
+                                                        <th class="text-danger">Atingir (Professora)</th>
+                                                        <th class="text-primary">Atingir (Professor)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2020</td>
+                                                        <td>81 pts</td>
+                                                        <td>91 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2021</td>
+                                                        <td>82 pts</td>
+                                                        <td>92 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2022</td>
+                                                        <td>83 pts</td>
+                                                        <td>93 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2023</td>
+                                                        <td>84 pts</td>
+                                                        <td>94 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2024</td>
+                                                        <td>85 pts</td>
+                                                        <td>95 pts</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025</td>
+                                                        <td>86 pts</td>
+                                                        <td>96 pts</td>
+                                                    </tr>
+                                                    <tr class="table-warning fw-bold">
+                                                        <td>2026</td>
+                                                        <td>87 pts</td>
+                                                        <td>97 pts</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <p class="small text-muted text-center mt-2 mb-0">A pontuação sobe 1 ponto
+                                                por ano até atingir 92 (mulher) / 100 (homem).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regra de Transição: PEDÁGIO 100% PROFESSORES -->
+                            <div class="card border-info shadow-sm mb-4">
+                                <div class="card-header bg-info text-dark py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-clock-history me-2"></i> 2. Transição:
+                                        Pedágio 100% (Magistério)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3">Exige-se cumprir um tempo extra (100%) equivalente
+                                        ao período que <strong>faltava</strong> para completar o Magistério na data de
+                                        <strong>07/03/2020</strong>.
+                                    </p>
+                                    <div class="row g-3">
+                                        <!-- Professora -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-info h-100">
+                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
+                                                    Professora</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-danger">52 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Professor -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-info h-100">
+                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i>
+                                                    Professor</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-primary">55 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">30 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Calculadora Visual Exemplo -->
+                                    <div class="alert alert-light border border-secondary border-dashed mt-4">
+                                        <h6 class="fw-bold text-dark"><i class="bi bi-calculator"></i> Exemplo Prático:
+                                            Pedágio (Professora que precisava de 25 anos)</h6>
+                                        <div
+                                            class="d-flex flex-wrap align-items-center justify-content-center gap-2 mt-3 fs-6">
+                                            <div class="badge bg-secondary p-2 text-dark bg-opacity-25">Faltavam em
+                                                07/03/2020<br><b>2 anos e 3 meses</b></div>
+                                            <i class="bi bi-plus fs-3"></i>
+                                            <div class="badge bg-info p-2 text-dark">Pedágio 100%<br><b>+ 2 anos e 3
+                                                    meses</b></div>
+                                            <i class="bi bi-arrow-right fs-3"></i>
+                                            <div class="badge bg-success p-2">Contribuição Exigida<br><b>27 anos e 3
+                                                    meses</b></div>
+                                        </div>
+                                        <div class="mt-3 text-center small text-muted fst-italic">"Assim que completar
+                                            25 anos de magistério, deve cumprir o tempo adicional de mais 2 anos e 3
+                                            meses..."</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Regra Permanente (Art. 10) - PROFESSORES -->
+                            <div class="card border-secondary shadow-sm mb-4">
+                                <div class="card-header bg-secondary text-white py-3">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-calendar-check me-2"></i> 3. Regra
+                                        Permanente (Professores)</h5>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="small text-muted mb-3">Aplicável aos professores que ingressarem no Estado
+                                        após a Reforma de <strong>07/03/2020</strong>.</p>
+                                    <div class="row g-3">
+                                        <!-- Professora -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-secondary h-100">
+                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
+                                                    Professora</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-danger">57 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Professor -->
+                                        <div class="col-md-6">
+                                            <div class="bg-white p-3 rounded border border-secondary h-100">
+                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i>
+                                                    Professor</h6>
+                                                <div class="d-flex justify-content-between mb-1"><span>Idade
+                                                        Mínima:</span> <span class="fw-bold text-primary">60 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1">
+                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
+                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
+                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="alert alert-secondary border-secondary mt-4 mb-0">
+                                        <h6 class="fw-bold text-dark"><i class="bi bi-calculator"></i> Forma de Cálculo
+                                            (Proventos)</h6>
+                                        <p class="small mb-0">60% da média aritmética de 100% das contribuições, com
+                                            acréscimo de 2% para cada ano que exceder os 20 anos de contribuição.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- Fim Tab-Content -->
+                </div>
+
+                <!-- SIMULADOR DE TEMPO DE CONTRIBUIÇÃO -->
+                <div id="simulador" class="tela bg-white p-4 p-md-5 rounded shadow-sm animate__animated animate__fadeIn"
+                    style="display:none">
+                    <h2 class="border-bottom pb-2 mb-4 color-primary-text"><i
+                            class="bi bi-calculator me-2"></i>Simulador de Tempo de Contribuição</h2>
+
+                    <!-- Aviso Legal -->
+                    <div class="alert alert-info border-start border-4 border-info shadow-sm mb-4" role="alert">
+                        <div class="d-flex align-items-center mb-1">
+                            <i class="bi bi-info-circle-fill fs-5 text-info me-2"></i>
+                            <span class="fw-bold small text-dark">Este simulador é apenas uma estimativa!</span>
+                        </div>
+                        <p class="mb-0 small text-muted lh-sm">Os resultados apresentados servem exclusivamente para dar
+                            um "norte" ao servidor. Considere apenas o tempo de contribuição no Estado de SP. A
+                            <strong>Validação de Tempo de Contribuição - VTC</strong> formal é obrigatória para
+                            confirmar seus fundamentos legais.
+                        </p>
+                    </div>
+
+                    <!-- FORMULÁRIO -->
+                    <form id="formSimulador" onsubmit="event.preventDefault(); simularContribuicao();">
+
+                        <!-- Linha 1: Sexo + Categoria -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-muted small"><i
+                                        class="bi bi-person me-1"></i>Sexo</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoM"
+                                            value="masculino" required>
+                                        <label class="form-check-label" for="sexoM"><i
+                                                class="bi bi-gender-male text-primary"></i> Masculino</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoF"
+                                            value="feminino">
+                                        <label class="form-check-label" for="sexoF"><i
+                                                class="bi bi-gender-female text-danger"></i> Feminino</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-muted small"><i
+                                        class="bi bi-briefcase me-1"></i>Tipo de Cargo</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="categoria" id="catQAE"
+                                            value="geral" required>
+                                        <label class="form-check-label" for="catQAE">QAE / QSE</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="categoria" id="catProf"
+                                            value="professor">
+                                        <label class="form-check-label" for="catProf">Professor(a)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Linha 2: Data Nascimento + Data Ingresso -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="simDataNasc" class="form-label fw-bold text-muted small"><i
+                                        class="bi bi-calendar-event me-1"></i>Data de Nascimento</label>
+                                <input id="simDataNasc" type="date" class="form-control border-2" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="simDataIngresso" class="form-label fw-bold text-muted small"><i
+                                        class="bi bi-calendar-check me-1"></i>Data de Ingresso no Estado</label>
+                                <input id="simDataIngresso" type="date" class="form-control border-2" required
+                                    onchange="verificarQuebraVinculo()">
+                                <small class="text-muted d-block" style="font-size:0.75rem">Considerar a data do
+                                    primeiro cargo com vínculo superior a 90 dias.</small>
+                            </div>
+                        </div>
+
+                        <!-- Pergunta condicional: Quebra de vínculo (aparece só se ingresso < 01/01/2004) -->
+                        <div id="divQuebraVinculo" class="row g-3 mb-3 d-none">
+                            <div class="col-12">
+                                <div class="alert alert-warning py-2 mb-0">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div>
+                                            <i class="bi bi-exclamation-triangle-fill text-warning fs-5"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <label class="form-label fw-bold small mb-1 text-dark">
+                                                Teve dispensa e nova admissão com intervalo superior a 90 dias?
+                                            </label>
+                                            <small class="d-block text-muted" style="font-size:0.72rem">A regra de
+                                                Paridade/Integralidade (EC 41/2003) exige que não haja quebra de vínculo
+                                                superior a 90 dias entre os cargos.</small>
+                                        </div>
+                                        <div class="d-flex gap-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="quebraVinculo"
+                                                    id="quebraSim" value="sim">
+                                                <label class="form-check-label small" for="quebraSim">Sim</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="quebraVinculo"
+                                                    id="quebraNao" value="nao" checked>
+                                                <label class="form-check-label small" for="quebraNao">Não</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Linha 3: Tempo Serviço Público + Tempo no Cargo -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold text-muted small mb-0"><i
+                                            class="bi bi-building me-1"></i>Tempo de Serviço Público</label>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        style="font-size:0.7rem" onclick="toggleModo(this, 'servPublico')">
+                                        <i class="bi bi-arrow-repeat me-1"></i>Usar Dias
+                                    </button>
+                                </div>
+                                <div id="servPublico_am" class="d-flex gap-2">
+                                    <input id="simServPublicoAnos" type="number" class="form-control border-2"
+                                        placeholder="Anos" min="0" max="50">
+                                    <input id="simServPublicoMeses" type="number" class="form-control border-2"
+                                        placeholder="Meses" min="0" max="11">
+                                </div>
+                                <div id="servPublico_dias" class="d-none">
+                                    <input id="simServPublicoDias" type="number" class="form-control border-2"
+                                        placeholder="Total em dias" min="0">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold text-muted small mb-0"><i
+                                            class="bi bi-person-badge me-1"></i>Tempo no Cargo Atual</label>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        style="font-size:0.7rem" onclick="toggleModo(this, 'cargo')">
+                                        <i class="bi bi-arrow-repeat me-1"></i>Usar Dias
+                                    </button>
+                                </div>
+                                <div id="cargo_am" class="d-flex gap-2">
+                                    <input id="simCargoAnos" type="number" class="form-control border-2"
+                                        placeholder="Anos" min="0" max="50">
+                                    <input id="simCargoMeses" type="number" class="form-control border-2"
+                                        placeholder="Meses" min="0" max="11">
+                                </div>
+                                <div id="cargo_dias" class="d-none">
+                                    <input id="simCargoDias" type="number" class="form-control border-2"
+                                        placeholder="Total em dias" min="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Linha 4: Contribuição em 07/03/2020 + Contribuição Atual -->
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold text-muted small mb-0"><i
+                                            class="bi bi-clock-history me-1"></i>Contribuição em 07/03/2020</label>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        style="font-size:0.7rem" onclick="toggleModo(this, 'contrib2020')">
+                                        <i class="bi bi-arrow-repeat me-1"></i>Usar Dias
+                                    </button>
+                                </div>
+                                <div id="contrib2020_am" class="d-flex gap-2">
+                                    <input id="simContrib2020Anos" type="number" class="form-control border-2"
+                                        placeholder="Anos" min="0" max="50">
+                                    <input id="simContrib2020Meses" type="number" class="form-control border-2"
+                                        placeholder="Meses" min="0" max="11">
+                                </div>
+                                <div id="contrib2020_dias" class="d-none">
+                                    <input id="simContrib2020Dias" type="number" class="form-control border-2"
+                                        placeholder="Total em dias" min="0">
+                                </div>
+                                <small class="text-muted fst-italic">Apenas tempo no Estado de SP.</small>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <label class="form-label fw-bold text-muted small mb-0"><i
+                                            class="bi bi-hourglass-split me-1"></i>Contribuição Total Atual</label>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2"
+                                        style="font-size:0.7rem" onclick="toggleModo(this, 'contribAtual')">
+                                        <i class="bi bi-arrow-repeat me-1"></i>Usar Dias
+                                    </button>
+                                </div>
+                                <div id="contribAtual_am" class="d-flex gap-2">
+                                    <input id="simContribAtualAnos" type="number" class="form-control border-2"
+                                        placeholder="Anos" min="0" max="50">
+                                    <input id="simContribAtualMeses" type="number" class="form-control border-2"
+                                        placeholder="Meses" min="0" max="11">
+                                </div>
+                                <div id="contribAtual_dias" class="d-none">
+                                    <input id="simContribAtualDias" type="number" class="form-control border-2"
+                                        placeholder="Total em dias" min="0">
+                                </div>
+                                <small class="text-muted fst-italic">Apenas tempo no Estado de SP.</small>
+                            </div>
+                        </div>
+
+                        <!-- Botão Simular -->
+                        <button type="submit" class="btn btn-primary d-block w-100 py-3 fw-bold shadow-sm mt-4 fs-5">
+                            <i class="bi bi-play-circle me-2"></i>Simular Tempo de Contribuição
+                        </button>
+                    </form>
+
+                    <!-- ÁREA DE RESULTADO -->
+                    <div id="resultadoSimulador" class="mt-4" style="display:none;">
+                        <!-- Preenchido via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- CONTAGEM (REQUERIMENTO) -->
+                <div id="contagem" class="tela bg-white p-4 p-md-5 rounded shadow-sm animate__animated animate__fadeIn"
+                    style="display:none">
+                    <h2 class="border-bottom pb-2 mb-4 color-primary-text">Requerimento de Contagem de Tempo</h2>
+                    <p class="text-muted small mb-4">Preencha os dados abaixo para gerar o documento oficial em formato
+                        Word (.doc).</p>
+
+                    <form id="formRequerimento" class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted small">Nome Completo</label>
+                            <input id="reqNome" class="form-control border-2" placeholder="Digite seu nome completo"
+                                required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">RG</label>
+                            <input id="reqRG" class="form-control border-2" placeholder="00.000.000-0" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">Telefone</label>
+                            <input id="reqTelefone" class="form-control border-2" placeholder="(11) 99999-9999"
+                                required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted small">Endereço Residencial</label>
+                            <input id="reqEndereco" class="form-control border-2"
+                                placeholder="Rua, número, bairro - Cidade/UF" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">E-mail Pessoal</label>
+                            <input id="reqEmail" type="email" class="form-control border-2" placeholder="seu@email.com"
+                                required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-muted small">Cargo</label>
+                            <input id="reqCargo" class="form-control border-2"
+                                placeholder="Ex: Professor de Educação Básica II" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted small">Unidade de Classificação (Escola)</label>
+                            <input id="reqEscola" list="escolas" class="form-control border-2"
+                                placeholder="Selecione ou digite sua escola" required>
+                            <datalist id="escolas">
+                                <option value="EE Alfredo Roberto">
+                                <option value="EE Profª Alice Romanos">
+                                <option value="EE Anderson da Silva Soares">
+                                <option value="EE Dr. Anis Fadul">
+                                <option value="EE Prof. Antonio Brasílio Menezes da Fonseca">
+                                <option value="EE Antonio Garcia">
+                                <option value="EE Prof. Antonio José Campos de Menezes">
+                                <option value="EE Antonio Rodrigues de Almeida">
+                                <option value="EE Antonio Valdemar Galo">
+                                <option value="EE Batista Renzi">
+                                <option value="EE Benedita de Campos Marcolongo">
+                                <option value="EE Comendador Brasílio Machado Neto">
+                                <option value="EE Prof. Carlos Molteni">
+                                <option value="EE Chojiro Segawa">
+                                <option value="EE Prof. David Jorge Curi">
+                                <option value="EE Euclides Igesca">
+                                <option value="EE Prof. Geraldo Justiniano de Rezende Silva">
+                                <option value="EE Prof. Gilberto de Carvalho">
+                                <option value="EE Dr. Giovanni Battista Raffo">
+                                <option value="EE Helena Zerrenner">
+                                <option value="EE Prof. José Papaiz">
+                                <option value="EE Prof. Joviano Satler de Lima">
+                                <option value="EE Profª Jussara Feitosa Domschke">
+                                <option value="EE Profª Leda Fernandes Lopes">
+                                <option value="EE Profª Lucy Franco Kowalski">
+                                <option value="EE Luiz Bianconi">
+                                <option value="EE Profª Luiza Hidaka">
+                                <option value="EE Manuel dos Santos Paiva">
+                                <option value="EE Profª Maria Elisa de Azevedo Cintra">
+                                <option value="EE Prof. Masaiti Sekine">
+                                <option value="EE Profª Angela Sueli Pontes Dias">
+                                <option value="EE Carlindo Reis">
+                                <option value="EE Conjunto Habitacional Parque Dourado II">
+                                <option value="EE Prof. Edir do Couto Rosa">
+                                <option value="EE Profª Eliane Aparecida Dantas da Silva">
+                                <option value="EE Profª Ignes Correa Allen">
+                                <option value="EE Iijima">
+                                <option value="EE Jardim São Paulo II">
+                                <option value="EE Dr. José Eduardo Vieira Raduan">
+                                <option value="EE Prof. Justino Marcondes Rangel">
+                                <option value="EE Profª Landia Santos Batista">
+                                <option value="EE Prof. Mario Manoel Dantas de Aquino">
+                                <option value="EE Martha Calixto Cazagrande">
+                                <option value="EE Prof. Olzanetti Gomes">
+                                <option value="EE Prof. Paulo Américo Paganucci">
+                                <option value="EE Prefeito Tacito Zanchetta">
+                                <option value="EE Zélia Gattai Amado">
+                            </datalist>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-muted small">Tipo de Contagem de Tempo</label>
+                            <select id="reqTipo" class="form-select border-2 shadow-sm">
+                                <option value="Abono de Permanência">Abono de Permanência</option>
+                                <option value="Aposentadoria">Aposentadoria</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-4 text-center">
+                            <button type="button" class="btn btn-primary btn-lg px-5 shadow-sm fw-bold py-3"
+                                onclick="gerarRequerimentoWord()">
+                                <i class="bi bi-file-earmark-word me-2"></i> Gerar Requerimento (.doc)
+                            </button>
+                            <p class="text-muted mt-3 small">O documento ficará disponível para edição e impressão
+                                imediata.</p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- CONSULTAR PROCESSO -->
+                <div id="processo" class="tela bg-white p-4 p-md-5 rounded shadow-sm animate__animated animate__fadeIn"
+                    style="display:none">
+                    <h2 class="border-bottom pb-2 mb-4 color-primary-text"><i class="bi bi-search me-2"></i>Consulta de
+                        Processo</h2>
+                    <div class="mb-4 text-center">
+                        <div
+                            class="small fw-medium text-dark bg-white rounded-3 shadow-sm border p-3 mt-3 d-inline-block text-start w-100 animate__animated animate__fadeInUp animate__delay-2s">
+                            <i class="bi bi-info-circle-fill text-primary me-2"></i><strong>Instrução:</strong> Insira
+                            seu nome completo sem abreviações para
+                            pesquisar o status do seu processo de VTC, Contagem de Tempo, Licença Prêmio,
+                            Aposentadoria (SEAPE) ou Evolução Funcional.
+                        </div>
+                        <div class="input-group input-group-lg shadow-sm">
+                            <span class="input-group-text bg-white border-end-0"><i
+                                    class="bi bi-person text-primary"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" id="processoNumero"
+                                placeholder="Insira seu nome completo (Ex: SELMA DA SILVA MARIANO DOMINGUES)">
+                            <button class="btn btn-primary px-4 fw-bold"
+                                onclick="consultarProcesso()">Consultar</button>
+                        </div>
+                    </div>
+
+                    <div id="resultadoProcesso"
+                        class="mt-4 p-3 rounded bg-light border-start border-4 border-info min-vh-10 d-flex align-items-center justify-content-center text-muted">
+                        Aguardando consulta...
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <hr class="my-4">
+                        <button class="btn btn-link text-decoration-none small text-muted"
+                            onclick="window.open('https://samucacs.github.io/painel-sepes/sefrep.html')">
+                            Consultar Dashboard
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-premium text-white text-center py-3 mt-5 shadow-lg">
+        <div class="container">
+            <p class="mb-0 small fw-medium">&copy; 2026 Unidade Regional de Ensino de Suzano - URE Suzano</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

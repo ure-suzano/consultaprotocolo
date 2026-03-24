@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pré-visualização: Mensagens VTC Humanizadas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body { background-color: #f8f9fa; padding: 40px; font-family: 'Arial', sans-serif; }
+        .container { max-width: 900px; }
+        .tema-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .borda-amarela { border-left: 6px solid #ffc107; }
+        .borda-vermelha { border-left: 6px solid #dc3545; }
+        .borda-verde { border-left: 6px solid #198754; }
+        
+        .header-processo { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .titulo-nome { font-size: 1.25rem; font-weight: 800; color: #333; margin: 0; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-meta { font-size: 0.85rem; color: #6c757d; font-weight: 600; margin-top: 5px; }
+        
+        /* A Caixa de Alerta Humanizada (A "Mágica") */
+        .alerta-humanizado {
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        .alerta-amarelo { background-color: #fff8e1; color: #856404; border: 1px solid #ffeeba; }
+        .alerta-vermelho { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .alerta-verde-claro { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; } /* Para success normal se quiser usar verde no ok */
+        .alerta-azul-claro { background-color: #cce5ff; color: #004085; border: 1px solid #b8daff; }
+
+        .alerta-titulo { font-weight: bold; font-size: 1.05rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;}
+        .alerta-destaque { font-weight: 700; background-color: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4 text-center" style="color:#004481; font-weight:bold;">Testes de Layout (Apenas Visual)</h2>
+        <p class="text-center text-muted mb-5">Simulação de como os textos ficariam inseridos na área de <strong>Observação</strong> nos cards atuais.</p>
+
+        <!-- EXEMPLO 1: DEVOLVIDO (Amarelo) -->
+        <div class="tema-card borda-amarela">
+            <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 p-2 px-3 rounded-pill" style="font-size: 0.85rem;"><i class="bi bi-arrow-return-left"></i> DEVOLVIDO (VTC)</span>
+            <div class="header-processo">
+                <div>
+                    <h3 class="titulo-nome">PATRICIA MARTINS SEABRA</h3>
+                    <div class="info-meta">PROTOCOLO: <span class="text-primary">3298/1000/1992</span> | DATA: 10/01/2026</div>
+                </div>
+            </div>
+            
+            <p class="text-muted small mb-0"><i class="bi bi-building"></i> E.E. BENEDITA DE CAMPOS MARCOLONGO</p>
+            
+            <!-- Injeção do texto Humanizado -->
+            <div class="alerta-humanizado alerta-amarelo mt-4 shadow-sm">
+                <div class="alerta-titulo"><i class="bi bi-exclamation-triangle-fill"></i> Processo Analisado, mas devolvido para correções.</div>
+                <p>Olá! O seu processo chegou ao nosso setor no dia <span class="alerta-destaque">10/01/2026</span> e informamos que ele já foi totalmente analisado pelo <strong>Responsável pela Emissão de VTC</strong>.</p>
+                <p>Durante a conferência, constatamos algumas pendências ou inconsistências nos documentos enviados. Por isso, no dia <span class="alerta-destaque">05/02/2026</span>, o seu pedido precisou ser devolvido oficialmente para a sua escola de origem.</p>
+                <hr style="border-color: rgba(0,0,0,0.1);">
+                <p class="mb-0"><strong>O que fazer agora?</strong> Por favor, procure a Gerência ou a Secretaria da sua Unidade Escolar. Eles já receberam nossos apontamentos e saberão exatamente quais correções precisam fazer para reenviar o processo.</p>
+            </div>
+        </div>
+
+        <!-- EXEMPLO 2: NÃO FAZ JUS (Vermelho) -->
+        <div class="tema-card borda-vermelha">
+            <span class="badge bg-danger position-absolute top-0 end-0 m-3 p-2 px-3 rounded-pill" style="font-size: 0.85rem;"><i class="bi bi-x-circle-fill"></i> NÃO FAZ JUS</span>
+            <div class="header-processo">
+                <div>
+                    <h3 class="titulo-nome">JOÃO DA SILVA SAURO</h3>
+                    <div class="info-meta">PROTOCOLO: <span class="text-primary">1458/0028/2005</span> | DATA: 15/02/2026</div>
+                </div>
+            </div>
+            
+            <p class="text-muted small mb-0"><i class="bi bi-building"></i> E.E. JOSÉ LAURENTINO</p>
+            
+            <div class="alerta-humanizado alerta-vermelho mt-4 shadow-sm">
+                <div class="alerta-titulo"><i class="bi bi-sign-stop-fill"></i> Análise Concluída: Requisitos Não Atingidos no Momento</div>
+                <p>A sua documentação deu entrada em <span class="alerta-destaque">15/02/2026</span> e foi minuciosamente conferida pelo <strong>Responsável pela Emissão de VTC</strong>. O processo foi indeferido na data de <span class="alerta-destaque">28/02/2026</span>.</p>
+                <p class="mb-0">Embasado na legislação previdenciária vigente do Estado de São Paulo (<strong>Lei Complementar Estadual nº 1.354/2020</strong>), informamos que, na data atual, o(a) servidor(a) <strong>não faz jus</strong> à concessão do benefício pleiteado, pois não atingiu a totalidade dos requisitos legais exigidos por lei (como tempo de contribuição, idade ou pedágio).</p>
+            </div>
+        </div>
+
+        <!-- EXEMPLO 3: ABONO CONCLUÍDO (Verde/Azul) -->
+        <div class="tema-card borda-verde">
+            <span class="badge bg-success position-absolute top-0 end-0 m-3 p-2 px-3 rounded-pill" style="font-size: 0.85rem;"><i class="bi bi-check-circle-fill"></i> ABONO FINALIZADO</span>
+            <div class="header-processo">
+                <div>
+                    <h3 class="titulo-nome">MARIA DE FÁTIMA OLIVEIRA</h3>
+                    <div class="info-meta">PROTOCOLO: <span class="text-primary">4570/0023/1999</span> | DATA: 02/03/2026</div>
+                </div>
+            </div>
+            
+            <p class="text-muted small mb-0"><i class="bi bi-building"></i> E.E. LUIZ CAMPOS</p>
+            
+            <div class="alerta-humanizado alerta-azul-claro mt-4 shadow-sm">
+                <div class="alerta-titulo"><i class="bi bi-check-all"></i> 1ª Fase Concluída: Validação de Tempo para Abono</div>
+                <p>Parabéns! O seu tempo de serviço enviado em <span class="alerta-destaque">02/03/2026</span> foi validado pelo <strong>Responsável pela Emissão de VTC</strong> no dia <span class="alerta-destaque">10/03/2026</span>. Você atendeu aos requisitos da <strong>L.C. nº 1.354/2020</strong> para o Abono de Permanência!</p>
+                <hr style="border-color: rgba(0,0,0,0.1);">
+                <p class="mb-0"><strong>Atenção aos Próximos Passos:</strong> O documento que emitimos (VTC) é apenas a primeira fase. A liberação financeira não é automática. O seu processo já retornou para a sua escola. Agora, a Gerência da sua Unidade Escolar deve providenciar a documentação necessária para fins de pagamento e encaminhar para o setor do SEFREP para inclusão no sistema.</p>
+            </div>
+        </div>
+
+        <!-- EXEMPLO 4: APOSENTADORIA CONCLUÍDA (Verde/Azul) -->
+        <div class="tema-card borda-verde">
+            <!-- Check Icon idêntico ao Abono como pedido -->
+            <span class="badge bg-success position-absolute top-0 end-0 m-3 p-2 px-3 rounded-pill" style="font-size: 0.85rem;"><i class="bi bi-check-circle-fill"></i> APOSENTADORIA CONCLUÍDA</span>
+            <div class="header-processo">
+                <div>
+                    <h3 class="titulo-nome">CARLOS ALBERTO MEDINA</h3>
+                    <div class="info-meta">PROTOCOLO: <span class="text-primary">0504/0028/2002</span> | DATA: 20/02/2026</div>
+                </div>
+            </div>
+            
+            <p class="text-muted small mb-0"><i class="bi bi-building"></i> E.E. VILA NOVA</p>
+            
+            <div class="alerta-humanizado alerta-azul-claro mt-4 shadow-sm">
+                <div class="alerta-titulo"><i class="bi bi-check-all"></i> VTC Atualizada: Preparada para Aposentadoria</div>
+                <p>Informamos que a revisão final do seu tempo de contribuição, solicitada em <span class="alerta-destaque">20/02/2026</span>, foi deferida e assinada pelo <strong>Responsável pela Emissão de VTC</strong> no dia <span class="alerta-destaque">12/03/2026</span>.</p>
+                <p>Sua Validação de Tempo de Contribuição está atualizada, atestando o direito à aposentadoria sob as regras do Estado de São Paulo.</p>
+                <hr style="border-color: rgba(0,0,0,0.1);">
+                <p class="mb-0"><strong>Próxima Ação Necessária:</strong> O processo retornou à sua escola. Para que a sua aposentadoria seja de fato publicada em Diário Oficial, você precisa procurar imediatamente a secretaria da sua Unidade Escolar e formalizar o pedido final de concessão (Trâmite de Aposentadoria), que será encaminhado posteriormente ao setor de SEAPE.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

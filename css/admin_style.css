@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0b1c3e 0%, #1e3c72 100%);
+    min-height: 100vh;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Identidade Visual */
+.text-brand {
+    color: #0b1c3e;
+}
+
+.brand-icon {
+    font-size: 3rem;
+    background: -webkit-linear-gradient(45deg, #0052D4, #4364F7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Painel de Vidro (Premium) */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    transition: all 0.4s ease;
+}
+
+.glass-dashboard {
+    max-width: 900px;
+}
+
+/* Botoes Dinâmicos */
+.btn-premium {
+    background: linear-gradient(90deg, #0052D4 0%, #4364F7 100%);
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-premium:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(67, 100, 247, 0.3);
+    color: white;
+}
+
+/* Campos de Texto Modernos */
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 4px rgba(67, 100, 247, 0.15);
+    border-color: #4364F7;
+}
+
+/* Alertas com Animação */
+.floating-alert {
+    display: none;
+    border-radius: 12px;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }

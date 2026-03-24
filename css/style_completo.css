@@ -1,0 +1,83 @@
+/* PERSONALIZAÇÕES PORTAL PREVIDENCIÁRIO (SOBRE BOOTSTRAP) */
+
+:root {
+    --primary-color: #0d6efd;
+    --dark-blue: #0b3d6d;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Telas (controle manual via JS) */
+.tela {
+    display: none;
+    min-height: 400px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.color-primary-text {
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+
+header {
+    background-color: var(--dark-blue) !important;
+}
+
+/* Ajustes Navbar */
+.navbar {
+    z-index: 1030;
+}
+
+.nav-item .btn {
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-item .btn:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Consultar Processo feedback box */
+#resultadoProcesso {
+    min-height: 80px;
+    font-size: 1.1rem;
+}
+
+/* Responsividade Customizada */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        margin-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 1rem;
+    }
+}
+
+/* Enhancements para UI de Requisitos da Previdência */
+#reqTab .nav-link {
+    color: var(--dark-blue);
+    transition: all 0.3s ease;
+}
+
+#reqTab .nav-link.active {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.border-dashed {
+    border-style: dashed !important;
+    border-width: 2px !important;
+}
+
+#requisitos .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#requisitos .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+}
