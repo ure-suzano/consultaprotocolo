@@ -319,20 +319,20 @@
                             Estadual nº 49/2020</strong> e <strong>LC nº 1.354/2020</strong> (Nova Previdência). Escolha
                         a sua categoria profissional abaixo:</p>
 
-                    <!-- Navegação Principal (Tabs) -->
-                    <ul class="nav nav-pills nav-fill mb-4 p-1 bg-light rounded-pill border shadow-sm" id="reqTab"
-                        role="tablist">
+                    <!-- Navegação Principal (Tabs Estilo Pílula) -->
+                    <ul class="nav nav-pills nav-fill mb-4 p-1 bg-white rounded-pill border shadow-sm mx-auto" id="reqTab"
+                        role="tablist" style="max-width: 800px;">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active rounded-pill fw-bold px-4" id="geral-tab"
+                            <button class="nav-link active rounded-pill fw-bold px-4 py-2" id="geral-tab"
                                 data-bs-toggle="tab" data-bs-target="#geral" type="button" role="tab"
-                                aria-selected="true">
-                                <i class="bi bi-person-badge"></i> Servidores Administrativos (Geral)
+                                aria-selected="true" style="transition:all 0.3s;">
+                                <i class="bi bi-person-badge-fill me-2"></i> Servidores Administrativos (Geral)
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link rounded-pill fw-bold px-4" id="prof-tab" data-bs-toggle="tab"
-                                data-bs-target="#prof" type="button" role="tab" aria-selected="false">
-                                <i class="bi bi-book-half"></i> Professores (Magistério)
+                            <button class="nav-link rounded-pill fw-bold px-4 py-2" id="prof-tab" data-bs-toggle="tab"
+                                data-bs-target="#prof" type="button" role="tab" aria-selected="false" style="transition:all 0.3s;">
+                                <i class="bi bi-book-half me-2"></i> Professores (Magistério)
                             </button>
                         </li>
                     </ul>
@@ -340,167 +340,132 @@
                     <!-- Conteúdo das Tabs -->
                     <div class="tab-content" id="reqTabContent">
 
-                        <!-- TAB: SERVIDORES GERAIS -->
-                        <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">
-
-                            <!-- Regra de Transição: PONTOS -->
-                            <div class="card mb-4 border-primary shadow-sm">
-                                <div class="card-header bg-primary text-white py-3">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-123 me-2"></i> 1. Transição: Regra de
-                                        Pontos (Art. 10)</h5>
+                        <!-- TAB: SERVIDORES GERAIS --                            <!-- Regra de Transição: PONTOS  -->
+                            <div class="card mb-5 border-0 shadow-sm rounded-4 overflow-hidden border-start border-4 border-primary">
+                                <div class="card-header bg-primary text-white py-3 px-4 d-flex align-items-center">
+                                    <span class="badge bg-white text-primary me-2 px-2 py-1" style="font-size: 0.65rem;">123</span>
+                                    <h5 class="mb-0 fw-bold">1. Transição: Regra de Pontos (Art. 10)</h5>
                                 </div>
-                                <div class="card-body bg-light">
-                                    <p class="small text-muted mb-3">Soma da <strong>Idade</strong> + <strong>Tempo de
-                                            Contribuição</strong> formatando a pontuação mínima.</p>
-                                    <div class="row g-3">
+                                <div class="card-body bg-white p-4">
+                                    <p class="small text-muted mb-4">Soma da <strong>Idade + Tempo de Contribuição</strong> formatando a pontuação mínima.</p>
+                                    
+                                    <div class="row g-4">
                                         <!-- Mulher -->
                                         <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-danger-subtle h-100">
-                                                <h6 class="text-danger fw-bold mb-3"><i class="bi bi-gender-female"></i>
-                                                    Mulher (QAE/QSE)</h6>
-                                                <hr class="text-danger-subtle my-2">
-                                                <div class="d-flex justify-content-between mb-2"><span>Idade
-                                                        Mínima:</span> <span class="badge bg-danger">57 anos</span>
+                                            <div class="p-4 rounded-4 border border-danger border-opacity-25 h-100 position-relative" style="background-color: #fff9f9;">
+                                                <h6 class="text-danger fw-bold mb-4 d-flex align-items-center">
+                                                    <i class="bi bi-gender-female me-2 fs-5"></i> Mulher (QAE/QSE)
+                                                </h6>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Idade Mínima:</span> 
+                                                    <span class="badge bg-danger rounded-3 px-3">57 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-2"><span>Contribuição
-                                                        (Total):</span> <span class="badge bg-danger">30 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Contribuição (Total):</span> 
+                                                    <span class="badge bg-danger rounded-3 px-3">30 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-2"><span>Serviço
-                                                        Público:</span> <span class="badge bg-secondary">20 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Serviço Público:</span> 
+                                                    <span class="badge bg-secondary rounded-3 px-3">20 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-3"><span>Tempo no
-                                                        Cargo:</span> <span class="badge bg-secondary">5 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="small text-muted">Tempo no Cargo:</span> 
+                                                    <span class="badge bg-secondary rounded-3 px-3">5 anos</span>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- Homem -->
                                         <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-primary-subtle h-100">
-                                                <h6 class="text-primary fw-bold mb-3"><i class="bi bi-gender-male"></i>
-                                                    Homem (QAE/QSE)</h6>
-                                                <hr class="text-primary-subtle my-2">
-                                                <div class="d-flex justify-content-between mb-2"><span>Idade
-                                                        Mínima:</span> <span class="badge bg-primary">62 anos</span>
+                                            <div class="p-4 rounded-4 border border-primary border-opacity-25 h-100 position-relative" style="background-color: #f9fbff;">
+                                                <h6 class="text-primary fw-bold mb-4 d-flex align-items-center">
+                                                    <i class="bi bi-gender-male me-2 fs-5"></i> Homem (QAE/QSE)
+                                                </h6>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Idade Mínima:</span> 
+                                                    <span class="badge bg-primary rounded-3 px-3">62 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-2"><span>Contribuição
-                                                        (Total):</span> <span class="badge bg-primary">35 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Contribuição (Total):</span> 
+                                                    <span class="badge bg-primary rounded-3 px-3">35 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-2"><span>Serviço
-                                                        Público:</span> <span class="badge bg-secondary">20 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="small text-muted">Serviço Público:</span> 
+                                                    <span class="badge bg-secondary rounded-3 px-3">20 anos</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between mb-3"><span>Tempo no
-                                                        Cargo:</span> <span class="badge bg-secondary">5 anos</span>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <span class="small text-muted">Tempo no Cargo:</span> 
+                                                    <span class="badge bg-secondary rounded-3 px-3">5 anos</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Tabela de Pontos Evolutiva -->
-                                    <div class="mt-4 p-3 border rounded bg-white">
-                                        <h6 class="fw-bold mb-3 text-center"><i
-                                                class="bi bi-graph-up-arrow text-primary"></i> Tabela Progressiva de
-                                            Pontos Mínimos</h6>
+                                     <!-- Tabela de Pontos Evolutiva -->
+                                    <div class="mt-5 p-0 border rounded-4 bg-white overflow-hidden shadow-xs">
+                                        <div class="bg-light py-2 px-3 border-bottom d-flex align-items-center justify-content-center">
+                                            <h6 class="fw-bold mb-0 small text-dark"><i class="bi bi-graph-up-arrow text-primary me-2"></i>Tabela Progressiva de Pontos Mínimos</h6>
+                                        </div>
                                         <div class="table-responsive">
-                                            <table class="table table-sm table-bordered text-center mb-0 align-middle">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th>Ano Vigente</th>
-                                                        <th class="text-danger">Atingir (Mulher)</th>
-                                                        <th class="text-pri                                                 <tbody>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2020" data-bs-content="Ano de início da Nova Previdência de SP (EC 49/2020).">
-                                                        <td>2020</td>
-                                                        <td>87 pts</td>
-                                                        <td>97 pts</td>
+                                            <table class="table table-sm table-hover text-center mb-0 align-middle" style="font-size: 0.85rem;">
+                                                <thead style="background-color: #f8f9fa;">
+                                                    <tr class="text-muted small">
+                                                        <th class="py-3 fw-bold border-0">Ano Vigente</th>
+                                                        <th class="py-3 fw-bold border-0 text-danger">Atingir (Mulher)</th>
+                                                        <th class="py-3 fw-bold border-0 text-primary">Atingir (Homem)</th>
                                                     </tr>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2021" data-bs-content="Aumento progressivo de 1 ponto em relação ao ano anterior.">
-                                                        <td>2021</td>
-                                                        <td>88 pts</td>
-                                                        <td>98 pts</td>
-                                                    </tr>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2022" data-bs-content="Mudança no patamar de pontuação para servidores ativos.">
-                                                        <td>2022</td>
-                                                        <td>89 pts</td>
-                                                        <td>99 pts</td>
-                                                    </tr>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2023" data-bs-content="Pontuação mínima exigida para protocolo realizado em 2023.">
-                                                        <td>2023</td>
-                                                        <td>90 pts</td>
-                                                        <td>100 pts</td>
-                                                    </tr>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2024" data-bs-content="Ano atual de referência para novos pedidos de aposentadoria.">
-                                                        <td>2024</td>
-                                                        <td>91 pts</td>
-                                                        <td>101 pts</td>
-                                                    </tr>
-                                                    <tr class="cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Vigência 2025" data-bs-content="Previsão para servidores que completam requisitos no próximo ano.">
-                                                        <td>2025</td>
-                                                        <td>92 pts</td>
-                                                        <td>102 pts</td>
-                                                    </tr>
-                                                    <tr class="table-primary fw-bold cursor-pointer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" title="Ano Referência: 2026" data-bs-content="Meta de pontuação projetada para o próximo ciclo de transição.">
-                                                        <td>2026</td>
-                                                        <td>93 pts</td>
-                                                        <td>103 pts</td>
-                                                    </tr>
-                                                </tbody>
-          <td>103 pts</td>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-muted opacity-50"><td class="py-2 border-0">2020</td><td class="py-2 border-0">87 pts</td><td class="py-2 border-0">97 pts</td></tr>
+                                                    <tr class="text-muted opacity-50"><td class="py-2 border-0">2021</td><td class="py-2 border-0">88 pts</td><td class="py-2 border-0">98 pts</td></tr>
+                                                    <tr class="text-muted opacity-50"><td class="py-2 border-0">2022</td><td class="py-2 border-0">89 pts</td><td class="py-2 border-0">99 pts</td></tr>
+                                                    <tr class="text-muted opacity-75"><td class="py-2 border-0">2023</td><td class="py-2 border-0">90 pts</td><td class="py-2 border-0">100 pts</td></tr>
+                                                    <tr class="text-muted opacity-75"><td class="py-2 border-0">2024</td><td class="py-2 border-0">91 pts</td><td class="py-2 border-0">101 pts</td></tr>
+                                                    <tr class="text-muted"><td class="py-2 border-0">2025</td><td class="py-2 border-0">92 pts</td><td class="py-2 border-0">102 pts</td></tr>
+                                                    <tr class="fw-bold" style="background-color: #e7f1ff; color: #0d6efd;">
+                                                        <td class="py-3 border-0">2026</td>
+                                                        <td class="py-3 border-0">93 pts</td>
+                                                        <td class="py-3 border-0">103 pts</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p class="small text-muted text-center mt-2 mb-0">A pontuação sobe 1 ponto
-                                                por ano até o limite legislativo de 100/105.</p>
+                                        </div>
+                                        <div class="bg-light py-2 border-top text-center">
+                                            <p class="small text-muted mb-0" style="font-size: 0.7rem;">A pontuação sobe 1 ponto por ano até o limite legislativo de 100/105.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Regra de Transição: PEDÁGIO 100% -->
-                            <div class="card border-info shadow-sm mb-4">
-                                <div class="card-header bg-info text-dark py-3">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-clock-history me-2"></i> 2. Transição:
-                                        Pedágio 100% (Geral)</h5>
+                            <div class="card mb-5 border-0 shadow-sm rounded-4 overflow-hidden border-start border-4 border-info">
+                                <div class="card-header bg-info text-white py-3 px-4 d-flex align-items-center">
+                                    <h5 class="mb-0 fw-bold"><i class="bi bi-clock-history me-2"></i> 2. Transição: Pedágio 100% (Geral)</h5>
                                 </div>
-                                <div class="card-body bg-light">
-                                    <p class="small text-muted mb-3">Exige-se cumprir um tempo extra (100%) equivalente
-                                        ao período que <strong>faltava</strong> para completar o tempo de contribuição
-                                        na data da Nova Previdência SP (<strong>07/03/2020</strong>).</p>
-                                    <div class="row g-3">
+                                <div class="card-body bg-white p-4">
+                                    <p class="small text-muted mb-4 fst-italic">Exige-se cumprir um tempo extra (100%) equivalente ao período que faltava para completar o tempo de contribuição na data de 07/03/2020.</p>
+                                    
+                                    <div class="row g-4">
                                         <!-- Mulher -->
                                         <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-info h-100">
-                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
-                                                    Mulher</h6>
-                                                <div class="d-flex justify-content-between mb-1"><span>Idade
-                                                        Mínima:</span> <span class="fw-bold text-danger">57 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1">
-                                                    <span>Contribuição:</span> <span class="fw-bold">30 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
-                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
-                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
-                                                </div>
+                                            <div class="p-4 rounded-4 border border-info border-opacity-25 h-100" style="background-color: #f4fcff;">
+                                                <h6 class="text-danger fw-bold mb-3 d-flex align-items-center small">
+                                                    <i class="bi bi-gender-female me-2"></i> MULHER
+                                                </h6>
+                                                <div class="d-flex justify-content-between mb-2 small"><span>Idade Mínima:</span> <span class="fw-bold text-danger">57 anos</span></div>
+                                                <div class="d-flex justify-content-between mb-2 small"><span>Contribuição:</span> <span class="fw-bold">30 anos</span></div>
+                                                <div class="d-flex justify-content-between mb-2 small text-muted"><span>Serviço Público:</span> <span>20 anos</span></div>
+                                                <div class="d-flex justify-content-between small text-muted"><span>Tempo no Cargo:</span> <span>5 anos</span></div>
                                             </div>
                                         </div>
                                         <!-- Homem -->
                                         <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-info h-100">
-                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i> Homem
+                                            <div class="p-4 rounded-4 border border-info border-opacity-25 h-100" style="background-color: #f4fcff;">
+                                                <h6 class="text-primary fw-bold mb-3 d-flex align-items-center small">
+                                                    <i class="bi bi-gender-male me-2"></i> HOMEM
                                                 </h6>
-                                                <div class="d-flex justify-content-between mb-1"><span>Idade
-                                                        Mínima:</span> <span class="fw-bold text-primary">60 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1">
-                                                    <span>Contribuição:</span> <span class="fw-bold">35 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
-                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
-                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
-                                                </div>
+                                                <div class="d-flex justify-content-between mb-2 small"><span>Idade Mínima:</span> <span class="fw-bold text-primary">60 anos</span></div>
+                                                <div class="d-flex justify-content-between mb-2 small"><span>Contribuição:</span> <span class="fw-bold">35 anos</span></div>
+                                                <div class="d-flex justify-content-between mb-2 small text-muted"><span>Serviço Público:</span> <span>20 anos</span></div>
+                                                <div class="d-flex justify-content-between small text-muted"><span>Tempo no Cargo:</span> <span>5 anos</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -516,92 +481,6 @@
                                             <i class="bi bi-plus fs-3"></i>
                                             <div class="badge bg-info p-2 text-dark">Pedágio 100%<br><b>+ 2 anos e 3
                                                     meses</b></div>
-                                            <i class="bi bi-arrow-right fs-3"></i>
-                                            <div class="badge bg-success p-2">Contribuição Exigida<br><b>37 anos e 3
-                                                    meses</b></div>
-                                        </div>
-                                        <div class="mt-3 text-center small text-muted fst-italic">"Assim que completar
-                                            35 anos deve cumprir o tempo adicional de mais 2 anos e 3 meses..."</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Regra Permanente (Art. 10) - GERAL -->
-                            <div class="card border-secondary shadow-sm mb-4">
-                                <div class="card-header bg-secondary text-white py-3">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-calendar-check me-2"></i> 3. Regra
-                                        Permanente (Geral)</h5>
-                                </div>
-                                <div class="card-body bg-light">
-                                    <p class="small text-muted mb-3">Aplicável aos servidores (QAE/QSE) que ingressarem
-                                        no Estado após a Reforma de <strong>07/03/2020</strong>.</p>
-                                    <div class="row g-3">
-                                        <!-- Mulher -->
-                                        <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-secondary h-100">
-                                                <h6 class="text-danger fw-bold"><i class="bi bi-gender-female"></i>
-                                                    Mulher</h6>
-                                                <div class="d-flex justify-content-between mb-1"><span>Idade
-                                                        Mínima:</span> <span class="fw-bold text-danger">62 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1">
-                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
-                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
-                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Homem -->
-                                        <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-secondary h-100">
-                                                <h6 class="text-primary fw-bold"><i class="bi bi-gender-male"></i> Homem
-                                                </h6>
-                                                <div class="d-flex justify-content-between mb-1"><span>Idade
-                                                        Mínima:</span> <span class="fw-bold text-primary">65 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1">
-                                                    <span>Contribuição:</span> <span class="fw-bold">25 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Serviço
-                                                        Público:</span> <span class="fw-bold text-muted">20 anos</span>
-                                                </div>
-                                                <div class="d-flex justify-content-between mb-1"><span>Tempo no
-                                                        Cargo:</span> <span class="fw-bold text-muted">5 anos</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="alert alert-secondary border-secondary mt-4 mb-0">
-                                        <h6 class="fw-bold text-dark"><i class="bi bi-calculator"></i> Forma de Cálculo
-                                            (Proventos)</h6>
-                                        <p class="small mb-0">60% da média aritmética de 100% das contribuições, com
-                                            acréscimo de 2% para cada ano que exceder os 20 anos de contribuição.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- TAB: PROFESSORES -->
-                        <div class="tab-pane fade" id="prof" role="tabpanel" aria-labelledby="prof-tab">
-
-                            <!-- Regra de Transição: PONTOS PROFESSORES -->
-                            <div class="card mb-4 border-warning shadow-sm">
-                                <div class="card-header bg-warning text-dark py-3">
-                                    <h5 class="mb-0 fw-bold"><i class="bi bi-123 me-2"></i> 1. Transição: Regra de
-                                        Pontos (Professores)</h5>
-                                </div>
-                                <div class="card-body bg-light">
-                                    <p class="small text-muted mb-3"><span class="badge bg-dark">Redução especial de 5
-                                            anos</span> Tempo válido apenas no efetivo exercício do Magistério.</p>
-                                    <div class="row g-3">
-                                        <!-- Professora -->
-                                        <div class="col-md-6">
-                                            <div class="bg-white p-3 rounded border border-danger-subtle h-100">
                                                 <h6 class="text-danger fw-bold mb-3"><i class="bi bi-gender-female"></i>
                                                     Professora</h6>
                                                 <hr class="text-danger-subtle my-2">
