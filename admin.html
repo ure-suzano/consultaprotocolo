@@ -63,54 +63,7 @@
             </button>
         </div>
 
-        <!-- NOVO: DASHBOARD DE ESTATÍSTICAS 2026 -->
-        <div class="row g-3 mb-4" id="cardsDashboard">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary border-0 shadow-sm" style="border-radius: 12px; background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title text-white-50 fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 1px;">TOTAL ANALISADOS (2026)</h6>
-                                <h2 class="mb-0 fw-bold display-5" id="dashTotal"><span class="spinner-border spinner-border-sm"></span></h2>
-                            </div>
-                            <div class="rounded-circle bg-white bg-opacity-25 p-3">
-                                <i class="bi bi-bar-chart-fill fs-2 text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-success border-0 shadow-sm" style="border-radius: 12px; background: linear-gradient(135deg, #198754 0%, #146c43 100%);">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title text-white-50 fw-bold mb-1" style="font-size: 0.75rem; letter-spacing: 1px;">APOSENTADORIAS NO DOE</h6>
-                                <h2 class="mb-0 fw-bold display-5" id="dashPub"><span class="spinner-border spinner-border-sm"></span></h2>
-                            </div>
-                            <div class="rounded-circle bg-white bg-opacity-25 p-3">
-                                <i class="bi bi-journal-check fs-2 text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-warning border-0 shadow-sm" style="border-radius: 12px; background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="card-title text-dark-50 fw-bold mb-1" style="opacity: 0.7; font-size: 0.75rem; letter-spacing: 1px;">AGUARDANDO PUBLICAÇÃO</h6>
-                                <h2 class="mb-0 fw-bold display-5 text-dark" id="dashFila"><span class="spinner-border spinner-border-sm"></span></h2>
-                            </div>
-                            <div class="rounded-circle bg-white bg-opacity-25 p-3">
-                                <i class="bi bi-hourglass-split fs-2 text-dark"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- REMOVIDO: DASHBOARD DE ESTATÍSTICAS (POR SOLICITAÇÃO) -->
 
         <div id="cadastroAlert" class="alert floating-alert"></div>
 
@@ -177,32 +130,15 @@
         </form>
 
         <div class="mt-4 pt-4 border-top">
-            <h5 class="fw-bold mb-3 text-brand text-muted small text-uppercase tracking-wider"><i class="bi bi-funnel me-2"></i>Filtros e Registros Recentes (Sefrep/Seape)</h5>
-            
-            <div class="row g-2 mb-3">
-                <div class="col-md-5">
-                    <input type="text" id="filtroAdminTermo" class="form-control form-control-sm border-2" placeholder="🔍 Buscar por Nome ou Protocolo..." onkeyup="filtrarAdmin()">
-                </div>
-                <div class="col-md-3">
-                    <select id="filtroAdminStatus" class="form-select form-select-sm border-2 fw-bold" onchange="filtrarAdmin()">
-                        <option value="">🎯 Todos os Status</option>
-                        <option value="Em Análise">Em Análise</option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Atrasado">Atrasado</option>
-                        <option value="Concluído">Concluído</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <div class="input-group input-group-sm">
-                        <select id="filtroAdminOrdem" class="form-select border-2" onchange="filtrarAdmin()">
-                            <option value="data_desc">📅 Novo → Antigo</option>
-                            <option value="data_asc">📅 Antigo → Novo</option>
-                            <option value="nome">👤 Nome (A-Z)</option>
-                        </select>
-                        <button class="btn btn-primary" onclick="carregarDashboard()">
-                            <i class="bi bi-arrow-clockwise"></i>
-                        </button>
-                    </div>
+            <div class="d-flex justify-content-between align-items-end mb-3">
+                <h5 class="fw-bold mb-0 text-brand text-muted small text-uppercase tracking-wider">
+                    <i class="bi bi-list-task me-2"></i>Registros Recentes (Sefrep/Seape)
+                </h5>
+                <div class="d-flex gap-2">
+                    <input type="text" id="filtroAdminTermo" class="form-control form-control-sm border-2" style="width: 250px;" placeholder="🔍 Nome ou Protocolo..." onkeyup="filtrarAdmin()">
+                    <button class="btn btn-sm btn-primary" onclick="carregarDashboard()">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
                 </div>
             </div>
 
@@ -210,11 +146,26 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-dark">
                         <tr style="font-size: 0.70rem;" class="text-uppercase ls-1">
-                            <th class="ps-3">DATA ENT.</th>
-                            <th>DATA SAÍDA</th>
+                            <th class="ps-3 py-3">
+                                DATA ENT. 
+                                <input type="date" id="filtroAdminDataEntrada" class="form-control form-control-xs mt-1 py-0 px-1" style="font-size: 0.65rem; height: 20px;" onchange="filtrarAdmin()">
+                            </th>
+                            <th>
+                                DATA SAÍDA
+                                <input type="date" id="filtroAdminDataSaida" class="form-control form-control-xs mt-1 py-0 px-1" style="font-size: 0.65rem; height: 20px;" onchange="filtrarAdmin()">
+                            </th>
                             <th>SERVIDOR ALVO</th>
-                            <th>TEMA CHAVE</th>
-                            <th>SITUAÇÃO</th>
+                            <th>TEMA CHAVE / TEMA</th>
+                            <th>
+                                SITUAÇÃO
+                                <select id="filtroAdminStatus" class="form-select form-select-xs mt-1 py-0 px-1" style="font-size: 0.65rem; height: 20px; line-height: 1;" onchange="filtrarAdmin()">
+                                    <option value="">TODOS</option>
+                                    <option value="Em Análise">ANÁLISE</option>
+                                    <option value="Pendente">PENDEN.</option>
+                                    <option value="Atrasado">ATRASO</option>
+                                    <option value="Concluído">CONCLU.</option>
+                                </select>
+                            </th>
                             <th class="pe-3">Nº PROTOCOLO</th>
                         </tr>
                     </thead>

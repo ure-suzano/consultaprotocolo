@@ -200,7 +200,8 @@ function renderizarTabelaAdmin(lista) {
 function filtrarAdmin() {
     const termo = document.getElementById('filtroAdminTermo').value.toUpperCase();
     const status = document.getElementById('filtroAdminStatus').value;
-    const ordenacao = document.getElementById('filtroAdminOrdem').value;
+    const dataEntrada = document.getElementById('filtroAdminDataEntrada').value;
+    const dataSaida = document.getElementById('filtroAdminDataSaida').value;
 
     let lista = [...(window._processosCache || [])];
 
@@ -217,14 +218,18 @@ function filtrarAdmin() {
         lista = lista.filter(p => p.status === status);
     }
 
-    // 3. Ordenação
-    if (ordenacao === 'data_desc') {
-        lista.sort((a, b) => new Date(b.data_entrada) - new Date(a.data_entrada));
-    } else if (ordenacao === 'data_asc') {
-        lista.sort((a, b) => new Date(a.data_entrada) - new Date(b.data_entrada));
-    } else if (ordenacao === 'nome') {
-        lista.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
+    // 3. Filtro por Data Entrada
+    if (dataEntrada) {
+        lista = lista.filter(p => p.data_entrada === dataEntrada);
     }
+
+    // 4. Filtro por Data Saída
+    if (dataSaida) {
+        lista = lista.filter(p => p.data_saida === dataSaida);
+    }
+
+    // 5. Ordenação Padrão (Decrescente por Data de Entrada)
+    lista.sort((a, b) => new Date(b.data_entrada) - new Date(a.data_entrada));
 
     renderizarTabelaAdmin(lista);
 }
