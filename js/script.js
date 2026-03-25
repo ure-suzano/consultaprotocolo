@@ -51,6 +51,10 @@ function mostrar(id) {
 
 // Lógica para abrir aba específica via parâmetro na URL (?aba=id)
 document.addEventListener("DOMContentLoaded", () => {
+    // Inicializa Popovers (Para as tabelas interativas)
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
     const urlParams = new URLSearchParams(window.location.search);
     const aba = urlParams.get('aba');
     if (aba) {
