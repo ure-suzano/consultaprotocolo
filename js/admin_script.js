@@ -169,8 +169,62 @@ async function carregarDashboard() {
         if(elTotal) elTotal.innerText = filtro2026.length;
         if(elPub) elPub.innerText = publicadas.length;
         if(elFila) elFila.innerText = aguardando;
+
+        // Armazenar globalmente para o sistema de filtros
+        window._processosCache = filtro2026;
+        renderizarTabelaAdmin(filtro2026);
         
     } catch(e) {
         console.error("Erro ao carregar Dashboard:", e);
     }
+}
+
+// NOVA FUNÇÃO: RENDERIZAR E FILTRAR TABELA ADMIN
+function renderizarTabelaAdmin(lista) {
+    const corpo = document.getElementById('corpoTabelaAdmin');
+    if (!corpo) return;
+
+    corpo.innerHTML = lista.map(p => `
+        <tr>
+            <td class="small fw-bold">${p.data_entrada ? new Date(p.data_entrada).toLocaleDateString('pt-BR') : '-'}</td>
+            <td class="small">${p.data_saida ? new Date(p.data_saida).toLocaleDateString('pt-BR') : '<span class="text-muted">-</span>'}</td>
+            <td class="fw-bold">${p.nome || 'N/A'}</td>
+            <td class="small text-muted">${p.tema || 'N/A'}</td>
+            <td><span class="badge bg-${p.status === 'CONCLUÍDO' ? 'success' : (p.status === 'ATRASADO' ? 'danger' : 'warning')}">${p.status}</span></td>
+            <td class="fw-bold text-primary">${p.protocolo || 'N/A'}</td>
+        </tr>
+    `).join('');
+}
+
+// FUNÇÃO DE FILTRO GLOBAL
+function filtrarAdmin() {
+    const termo = document.getElementById('filtroAdminTermo').value.toUpperCase();
+    const status = document.getElementById('filtroAdminStatus').value;
+    const ordenacao = document.getElementById('filtroAdminOrdem').value;
+
+    let lista = [...(window._processosCache || [])];
+
+    // 1. Filtro por Termo (Nome ou Protocolo)
+    if (termo) {
+        lista = lista.filter(p => 
+            (p.nome || "").toUpperCase().includes(termo) || 
+            (p.protocolo || "").toUpperCase().includes(termo)
+        );
+    }
+
+    // 2. Filtro por Status
+    if (status) {
+        lista = lista.filter(p => p.status === status);
+    }
+
+    // 3. Ordenação
+    if (ordenacao === 'data_desc') {
+        lista.sort((a, b) => new Date(b.data_entrada) - new Date(a.data_entrada));
+    } else if (ordenacao === 'data_asc') {
+        lista.sort((a, b) => new Date(a.data_entrada) - new Date(b.data_entrada));
+    } else if (ordenacao === 'nome') {
+        lista.sort((a, b) => (a.nome || "").localeCompare(b.nome || ""));
+    }
+
+    renderizarTabelaAdmin(lista);
 }

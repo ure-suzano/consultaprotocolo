@@ -169,14 +169,66 @@
                     <label class="form-label fw-bold small text-muted">Observações da Análise</label>
                     <textarea class="form-control" id="cadObservacoes" rows="2" placeholder="Descreva anexos faltantes ou publicação de diário oficial..."></textarea>
                 </div>
-            </div>
-
             <div class="mt-4 pt-3 border-top text-end">
-                <button type="submit" id="btnSalvar" class="btn btn-premium px-5 py-2">
+                <button type="submit" id="btnSalvar" class="btn btn-premium px-5 py-2 fw-bold shadow-sm">
                     <i class="bi bi-cloud-arrow-up-fill me-2"></i> Gravar no Banco
                 </button>
             </div>
         </form>
+
+        <div class="mt-4 pt-4 border-top">
+            <h5 class="fw-bold mb-3 text-brand text-muted small text-uppercase tracking-wider"><i class="bi bi-funnel me-2"></i>Filtros e Registros Recentes (Sefrep/Seape)</h5>
+            
+            <div class="row g-2 mb-3">
+                <div class="col-md-5">
+                    <input type="text" id="filtroAdminTermo" class="form-control form-control-sm border-2" placeholder="🔍 Buscar por Nome ou Protocolo..." onkeyup="filtrarAdmin()">
+                </div>
+                <div class="col-md-3">
+                    <select id="filtroAdminStatus" class="form-select form-select-sm border-2 fw-bold" onchange="filtrarAdmin()">
+                        <option value="">🎯 Todos os Status</option>
+                        <option value="Em Análise">Em Análise</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Atrasado">Atrasado</option>
+                        <option value="Concluído">Concluído</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group input-group-sm">
+                        <select id="filtroAdminOrdem" class="form-select border-2" onchange="filtrarAdmin()">
+                            <option value="data_desc">📅 Novo → Antigo</option>
+                            <option value="data_asc">📅 Antigo → Novo</option>
+                            <option value="nome">👤 Nome (A-Z)</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="carregarDashboard()">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive rounded-3 border shadow-sm bg-white">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-dark">
+                        <tr style="font-size: 0.70rem;" class="text-uppercase ls-1">
+                            <th class="ps-3">DATA ENT.</th>
+                            <th>DATA SAÍDA</th>
+                            <th>SERVIDOR ALVO</th>
+                            <th>TEMA CHAVE</th>
+                            <th>SITUAÇÃO</th>
+                            <th class="pe-3">Nº PROTOCOLO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaAdmin" style="font-size: 0.82rem;">
+                        <!-- Preenchido via JS (admin_script.js) -->
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                <span class="spinner-border spinner-border-sm me-2"></span> Carregando registros...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
 </html>

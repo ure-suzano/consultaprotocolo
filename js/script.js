@@ -104,6 +104,37 @@ async function consultarProcesso() {
         return;
     }
 
+    // 4. MENSAGEM HUMANIZADA POR STATUS DE VTC
+    const getHumanMessage = (status) => {
+        const messages = {
+            'EM ANDAMENTO': {
+                title: 'Tudo caminhando bem!',
+                text: 'Seu processo está seguindo o fluxo normal e em análise pela nossa equipe. Estamos cuidando de tudo.',
+                color: 'info',
+                icon: 'bi-gear-wide-connected'
+            },
+            'PENDENTE': {
+                title: 'Aumento de Demanda',
+                text: 'Tivemos um grande volume de pedidos recentemente. Pode levar um pouquinho mais de tempo, mas sua vez está chegando!',
+                color: 'warning',
+                icon: 'bi-exclamation-triangle'
+            },
+            'ATRASADO': {
+                title: 'Sentimos muito pela demora',
+                text: 'Estamos com uma demanda muito acima do esperado, o que gerou um atraso. Estamos trabalhando duro para regularizar o quanto antes.',
+                color: 'danger',
+                icon: 'bi- clock-history'
+            },
+            'CONCLUÍDO': {
+                title: 'Processo Finalizado!',
+                text: 'Boas notícias! Sua análise foi concluída com sucesso. Verifique as observações abaixo.',
+                color: 'success',
+                icon: 'bi-check-circle'
+            }
+        };
+        return messages[status.toUpperCase()] || { title: 'Em Análise', text: 'Seu processo está sendo processado por nossa equipe técnica.', color: 'primary', icon: 'bi-info-circle' };
+    };
+
     // 1. Limpeza e Feedback Visual (Moderno)
     resultadoArea.innerHTML = `
         <div class="text-center py-5 w-100 animate__animated animate__fadeIn">
