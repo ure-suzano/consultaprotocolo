@@ -181,15 +181,23 @@ async function consultarProcesso() {
         });
 
         // A fila global agora é calculada nativamente pela API Vercel no Backend para máxima segurança.
+    
+    // --- FUNÇÃO DE ESCAPE PARA PREVENÇÃO DE XSS ---
+    const escapeHTML = (str) => {
+        if (!str) return "";
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    };
 
         // 3. Renderização Premium
         for (const processo of resultadosFiltrados) {
-            const tema = (processo.tema || "Processo").toUpperCase();
+            const tema = escapeHTML((processo.tema || "Processo").toUpperCase());
             const statusReal = (processo.status || "em analise").toLowerCase();
-            const observacao = processo.observacoes || "";
-            const interessado = (processo.nome || "Não informado").toUpperCase();
-            const protocolo = processo.protocolo || "N/D";
-            const escola = (processo.escola || "").toUpperCase();
+            const observacao = escapeHTML(processo.observacoes || "");
+            const interessado = escapeHTML((processo.nome || "Não informado").toUpperCase());
+            const protocolo = escapeHTML(processo.protocolo || "N/D");
+            const escola = escapeHTML((processo.escola || "").toUpperCase());
             // Formatação de Datas
             const dataEntrada = formatarDataLocal(processo.data_entrada);
             const dataSaida = formatarDataLocal(processo.data_saida);
